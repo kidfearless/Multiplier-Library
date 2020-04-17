@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MultiplierLibrary
+namespace MultiplierLibrary.Model
 {
 	public enum Types : int
 	{
