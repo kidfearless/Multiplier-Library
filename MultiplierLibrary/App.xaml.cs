@@ -40,9 +40,6 @@ namespace MultiplierLibrary
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
 			MainPage = new Quizzer();
-
-
-			
 		}
 
 		protected override void OnStart()
