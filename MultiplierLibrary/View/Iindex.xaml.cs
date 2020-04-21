@@ -9,13 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace MultiplierLibrary.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage : ContentPage
-	{
-		public MainPage()
-		{
-			InitializeComponent();
-			
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Iindex : ContentPage
+    {
+        public Iindex()
+        {
+            InitializeComponent();
+        }
+    }
 }

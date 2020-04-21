@@ -18,12 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <Folder Include="Controller\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controller\" />
+    <EmbeddedResource Update="View\Iindex.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
