@@ -148,7 +148,7 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 9),
+				Left = random.Next(1, 9),
 				Right = random.Next(1, 9)
 			};
 
