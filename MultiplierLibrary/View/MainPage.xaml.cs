@@ -15,6 +15,7 @@ namespace MultiplierLibrary.View
 		public MainPage()
 		{
 			InitializeComponent();
+			
 		}
 	}
 }
