@@ -8,6 +8,7 @@ using MultiplierLibrary.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
+using MultiplierLibrary.Controller;
 
 namespace MultiplierLibrary
 {
@@ -31,6 +32,7 @@ namespace MultiplierLibrary
 
 		public Multiplier Multiplier;
 		public Results Results;
+		public GameController Game;
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
@@ -39,7 +41,9 @@ namespace MultiplierLibrary
 			App.Current = this;
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
-			MainPage = new Quizzer();
+			ProblemsPage problemsPage = new ProblemsPage();
+			MainPage = problemsPage;
+			this.Game = new GameController(problemsPage);
 		}
 
 		protected override void OnStart()

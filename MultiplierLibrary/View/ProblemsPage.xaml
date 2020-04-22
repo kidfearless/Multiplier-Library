@@ -64,7 +64,7 @@
 			</StackLayout>
 
 			<!--text box-->
-			<Entry x:Name="textBoxAnswer" ScaleX="0.6" Keyboard="Numeric" IsTextPredictionEnabled="False" IsTabStop="True" IsSpellCheckEnabled="False"/>
+			<Entry x:Name="textBoxAnswer" ScaleX="1" Keyboard="Numeric" IsTextPredictionEnabled="False" IsTabStop="True" IsSpellCheckEnabled="False"/>
 
 
 
