@@ -39,7 +39,7 @@ namespace MultiplierLibrary
 			App.Current = this;
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
-			MainPage = new Quizzer();
+			MainPage = new NavPage();
 		}
 
 		protected override void OnStart()
