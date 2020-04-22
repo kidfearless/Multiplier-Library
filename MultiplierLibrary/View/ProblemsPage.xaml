@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d"
+			 x:Class="MultiplierLibrary.View.ProblemsPage" WidthRequest="0.8">
+	<ContentPage.Content>
+		<StackLayout Padding="10, 20, 10, 0">
+			<!--scoreboard-->
+			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+				<StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+					<Label FontSize="24"  TextColor="Green" Text="Correct"></Label>
+					<Label FontSize="24" TextColor="Green" Text="0" x:Name="labelCorrect"></Label>
+				</StackLayout>
+				<StackLayout Orientation="Horizontal"
+							 HorizontalOptions="CenterAndExpand">
+					<Label	FontSize="24"
+							Text="Total">
+					</Label>
+					<Label	FontSize="24"
+							Text="0"
+							x:Name="labelTotal">
+					</Label>
+				</StackLayout>
+				<StackLayout Orientation="Horizontal" HorizontalOptions="End">
+					<Label	FontSize="24"
+							TextColor="Red"
+							Text="Wrong">
+					</Label>
+					<Label	FontSize="24"
+							TextColor="Red"
+							Text="0"
+							x:Name="labelWrong">
+					</Label>
+				</StackLayout>
+			</StackLayout>
+			<!--multiply label-->
+			<Label	TextColor="Black"
+					Margin="0,5,0,0"
+					FontSize="36"
+					HorizontalOptions="Center"
+					Text=" Multiply!">
+			</Label>
+
+			<!--multiplication labels-->
+			<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+				<Label	x:Name="labelLeft"
+						TextColor="Black"
+						FontSize="72"
+						Text="2"
+						>
+				</Label>
+				<Label	VerticalOptions="CenterAndExpand"
+						TextColor="Black"
+						FontSize="50"
+						Text="X">
+				</Label>
+				<Label	x:Name="labelRight"
+						TextColor="Black"
+						FontSize="72"
+						Text="2">
+				</Label>
+			</StackLayout>
+
+			<!--text box-->
+			<Entry x:Name="textBoxAnswer" ScaleX="0.6" Keyboard="Numeric" IsTextPredictionEnabled="False" IsTabStop="True" IsSpellCheckEnabled="False"/>
+
+
+
+			<!--skip-->
+			<Label	HorizontalOptions="Center"
+					TextDecorations="Underline"
+					FontSize="18"
+					Text="skip"
+					TextColor="#4D75F7"
+					x:Name="labelSkip"/>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
