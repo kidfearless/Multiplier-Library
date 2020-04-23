@@ -138,4 +138,10 @@
       <Name>MultiplierLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\number.png" />
+  </ItemGroup>
 </Project>
