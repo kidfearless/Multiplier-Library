@@ -22,8 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\Iindex.xaml">
-    <EmbeddedResource Update="NavPage.xaml">
+    <EmbeddedResource Update="View\NavPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\MainPage.xaml">

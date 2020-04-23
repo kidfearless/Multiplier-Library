@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MultiplierLibrary.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainPage : ContentPage
+	public partial class HomePage : ContentPage
 	{
-		public MainPage()
+		public HomePage()
 		{
 			InitializeComponent();
 		}

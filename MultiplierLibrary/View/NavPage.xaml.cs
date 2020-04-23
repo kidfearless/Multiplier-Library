@@ -15,6 +15,7 @@ namespace MultiplierLibrary
         public NavPage()
         {
             InitializeComponent();
+
         }
     }
 }

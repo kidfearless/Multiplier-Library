@@ -4,7 +4,8 @@
 			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d"
-			 x:Class="MultiplierLibrary.View.ProblemsPage" WidthRequest="0.8">
+			 x:Class="MultiplierLibrary.View.ProblemsPage" WidthRequest="0.8"
+			 x:Name="ProblemPage2">
 	<ContentPage.Content>
 		<StackLayout Padding="10, 20, 10, 0">
 			<!--scoreboard-->

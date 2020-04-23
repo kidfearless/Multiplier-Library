@@ -41,9 +41,9 @@ namespace MultiplierLibrary
 			App.Current = this;
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
-			ProblemsPage problemsPage = new ProblemsPage();
-			this.Game = new GameController(problemsPage);
-			MainPage = new NavPage();
+			NavPage page = new NavPage();
+			MainPage = page;
+			this.Game = new GameController(page.ProblemPage);
 		}
 
 		protected override void OnStart()
