@@ -14,10 +14,10 @@ namespace MultiplierLibrary.Model
 		public int Right { get; set; }
 		public bool Correct { get; set; }
 		public Types Type { get; set; }
-		//public int GetAnswer()
-		//{
-		//	return this.Left * this.Right;
-		//}
+		public int GetAnswer()
+		{
+			return this.Left * this.Right;
+		}
 
 	}
 }
