@@ -71,30 +71,30 @@
 
             </StackLayout>
 
-            <!--<StackLayout>
-                --><!--Label for Probels --><!--
-                <Label Text=" Problems" 
-                     VerticalOptions="FillAndExpand"
-                     HorizontalOptions="CenterAndExpand"
-                     Margin="0, 35, 15, 5"
-                     FontSize="Medium"
-                   />
-
-            </StackLayout>
-
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
-                <Label Text="Problem 1" 
-                           Margin="0, 30, 15, 5"
-                           x:Name="Problem"
-                           />
-                <Label Text="2x2=4" 
-                       Margin="0, 30, 15, 5"
-                       x:Name="ProblemSolution"
-                           
-                           />
+                <Label Text="Problem  1:" 
+                       x:Name="labelproblem"/>
 
-            </StackLayout>-->
+                <Label	x:Name="labelLeft"					
+						Text="2"
+						/>
+
+                <Label	
+						TextColor="Black"
+						Text="X"/>
+
+                <Label	x:Name="labelRight"
+						Text="2"/>
+                <Label 
+                    Text="="
+                    />
+
+                <Label Text="0"
+                       x:Name="labelequal"/>
+
+
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>
