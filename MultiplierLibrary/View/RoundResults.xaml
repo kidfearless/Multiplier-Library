@@ -71,8 +71,8 @@
 
             </StackLayout>
 
-            <StackLayout>
-                <!--Label for Probels -->
+            <!--<StackLayout>
+                --><!--Label for Probels --><!--
                 <Label Text=" Problems" 
                      VerticalOptions="FillAndExpand"
                      HorizontalOptions="CenterAndExpand"
@@ -94,7 +94,7 @@
                            
                            />
 
-            </StackLayout>
+            </StackLayout>-->
 
         </StackLayout>
     </ContentPage.Content>
