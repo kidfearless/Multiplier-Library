@@ -103,6 +103,30 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ic_home_variant_black_18dp.png" />
+    <Content Include="Assets\ic_home_variant_black_24dp.png" />
+    <Content Include="Assets\ic_home_variant_black_36dp.png" />
+    <Content Include="Assets\ic_home_variant_black_48dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_18dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_24dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_36dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_48dp.png" />
+    <Content Include="Assets\ic_home_variant_white_18dp.png" />
+    <Content Include="Assets\ic_home_variant_white_24dp.png" />
+    <Content Include="Assets\ic_home_variant_white_36dp.png" />
+    <Content Include="Assets\ic_home_variant_white_48dp.png" />
+    <Content Include="Assets\ic_sigma_black_18dp.png" />
+    <Content Include="Assets\ic_sigma_black_24dp.png" />
+    <Content Include="Assets\ic_sigma_black_36dp.png" />
+    <Content Include="Assets\ic_sigma_black_48dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_18dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_24dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_36dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_48dp.png" />
+    <Content Include="Assets\ic_sigma_white_18dp.png" />
+    <Content Include="Assets\ic_sigma_white_24dp.png" />
+    <Content Include="Assets\ic_sigma_white_36dp.png" />
+    <Content Include="Assets\ic_sigma_white_48dp.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />

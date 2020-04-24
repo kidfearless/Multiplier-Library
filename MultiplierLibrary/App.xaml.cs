@@ -36,9 +36,9 @@ namespace MultiplierLibrary
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
-			InitializeComponent();
-
 			App.Current = this;
+
+			InitializeComponent();
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
 			NavPage page = new NavPage();

@@ -4,9 +4,9 @@
 			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d"
-			xmlns:views="clr-namespace:MultiplierLibrary.View"
+			 xmlns:views="clr-namespace:MultiplierLibrary.View"
 			 x:Class="MultiplierLibrary.NavPage">
 	<!--Views-->
-	<views:HomePage x:Name="HomePage" x:FieldModifier="public" Title="New Game" Icon="number.png"/>
-	<views:ProblemsPage x:Name="ProblemPage" x:FieldModifier="public" Title="Problems" Icon="number.png"/>
+	<views:HomePage x:Name="HomePage" x:FieldModifier="public" Title="New Game" IconImageSource="ic_home_variant_white_24dp.png"/>
+	<views:ProblemsPage x:Name="ProblemPage" x:FieldModifier="public" Title="Problems" IconImageSource="ic_sigma_white_24dp.png"/>
 </TabbedPage>
