@@ -103,10 +103,46 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ic_cog_black_18dp.png" />
+    <Content Include="Assets\ic_cog_black_24dp.png" />
+    <Content Include="Assets\ic_cog_black_36dp.png" />
+    <Content Include="Assets\ic_cog_black_48dp.png" />
+    <Content Include="Assets\ic_cog_grey600_18dp.png" />
+    <Content Include="Assets\ic_cog_grey600_24dp.png" />
+    <Content Include="Assets\ic_cog_grey600_36dp.png" />
+    <Content Include="Assets\ic_cog_grey600_48dp.png" />
+    <Content Include="Assets\ic_cog_white_18dp.png" />
+    <Content Include="Assets\ic_cog_white_24dp.png" />
+    <Content Include="Assets\ic_cog_white_36dp.png" />
+    <Content Include="Assets\ic_cog_white_48dp.png" />
+    <Content Include="Assets\ic_home_variant_black_18dp.png" />
+    <Content Include="Assets\ic_home_variant_black_24dp.png" />
+    <Content Include="Assets\ic_home_variant_black_36dp.png" />
+    <Content Include="Assets\ic_home_variant_black_48dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_18dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_24dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_36dp.png" />
+    <Content Include="Assets\ic_home_variant_grey600_48dp.png" />
+    <Content Include="Assets\ic_home_variant_white_18dp.png" />
+    <Content Include="Assets\ic_home_variant_white_24dp.png" />
+    <Content Include="Assets\ic_home_variant_white_36dp.png" />
+    <Content Include="Assets\ic_home_variant_white_48dp.png" />
+    <Content Include="Assets\ic_sigma_black_18dp.png" />
+    <Content Include="Assets\ic_sigma_black_24dp.png" />
+    <Content Include="Assets\ic_sigma_black_36dp.png" />
+    <Content Include="Assets\ic_sigma_black_48dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_18dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_24dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_36dp.png" />
+    <Content Include="Assets\ic_sigma_grey600_48dp.png" />
+    <Content Include="Assets\ic_sigma_white_18dp.png" />
+    <Content Include="Assets\ic_sigma_white_24dp.png" />
+    <Content Include="Assets\ic_sigma_white_36dp.png" />
+    <Content Include="Assets\ic_sigma_white_48dp.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\settings.png" />
+    <BundleResource Include="Assets\settings.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
@@ -131,8 +167,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <EmbeddedResource Include="Assets\list.png" />
-    <EmbeddedResource Include="Assets\number.png" />
+    <BundleResource Include="Assets\list.png" />
+    <BundleResource Include="Assets\number.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
