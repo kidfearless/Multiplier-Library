@@ -144,4 +144,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\number.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.png" />
+  </ItemGroup>
 </Project>
