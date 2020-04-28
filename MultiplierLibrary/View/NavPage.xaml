@@ -9,6 +9,6 @@
 	<!--Views-->
 	<views:HomePage x:Name="HomePage" x:FieldModifier="public" Title="New Game" IconImageSource="ic_home_variant_white_24dp.png"/>
 	<views:ProblemsPage x:Name="ProblemPage" x:FieldModifier="public" Title="Problems" IconImageSource="ic_sigma_white_24dp.png"/>
-	<views:RoundResults x:Name="RoundResultsPage" x:FieldModifier="public" Title="Results" Icon="number.png"/>
-	<views:SettingsPage x:Name="SettingsPage" x:FieldModifier="public" Title="Settings" Icon="settings.png"/>
+	<views:RoundResults x:Name="RoundResultsPage" x:FieldModifier="public" Title="Results" Icon="ic_sigma_white_24dp.png"/>
+	<views:SettingsPage x:Name="SettingsPage" x:FieldModifier="public" Title="Settings" Icon="ic_cog_white_24dp.png"/>
 </TabbedPage>

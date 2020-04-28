@@ -23,11 +23,12 @@ namespace MultiplierLibrary
 
             InitializeComponent();
 
-
             if(Device.RuntimePlatform != Device.iOS)
             {
                 HomePage.IconImageSource = "ic_home_variant_grey600_24dp.png";
                 ProblemPage.IconImageSource = "ic_sigma_grey600_24dp.png";
+                RoundResultsPage.IconImageSource = "ic_sigma_grey600_24dp.png";
+                SettingsPage.IconImageSource = "ic_cog_grey600_24dp.png";
             }
         }
     }
