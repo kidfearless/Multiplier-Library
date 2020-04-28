@@ -169,5 +169,6 @@
     <Content Include="Resources\ic_sigma_white_24dp.png" />
     <Content Include="Resources\ic_sigma_white_36dp.png" />
     <Content Include="Resources\ic_sigma_white_48dp.png" />
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
 </Project>
