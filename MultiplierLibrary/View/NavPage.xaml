@@ -9,5 +9,6 @@
 	<!--Views-->
 	<views:HomePage x:Name="HomePage" x:FieldModifier="public" Title="New Game" Icon="number.png"/>
 	<views:ProblemsPage x:Name="ProblemPage" x:FieldModifier="public" Title="Problems" Icon="number.png"/>
-    <views:SettingsPage x:Name="SettingsPage" x:FieldModifier="public" Title="Settings" Icon="settings.png"/>
+	<views:RoundResults x:Name="RoundResultsPage" x:FieldModifier="public" Title="Results" Icon="number.png"/>
+	<views:SettingsPage x:Name="SettingsPage" x:FieldModifier="public" Title="Settings" Icon="settings.png"/>
 </TabbedPage>
