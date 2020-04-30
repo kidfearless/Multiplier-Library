@@ -13,6 +13,7 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProblemsPage : ContentPage
 	{
+		public bool isRoundDone = false;
 		public Label LabelCorrect => labelCorrect;
 		public Label LabelTotal => labelTotal;
 		public Label LabelWrong => labelWrong;
@@ -45,6 +46,30 @@ namespace MultiplierLibrary.View
 			{
 				App.Current.Game.OnTextBoxEnter(textBox);
 			}
+		}
+
+		private void Congratulations(object sender, EventArgs args)
+		{
+			if (isRoundDone)
+			{
+				label1.FontSize = 40;
+				label1.TextColor = Color.Black;
+				label2.FontSize = 40;
+				label2.TextColor = Color.Black;
+				settingsButton.IsVisible = true;
+				againButton.IsVisible = true;
+				homeButton.IsVisible = true;
+				resultsButton.IsVisible = true;
+
+				labelSkip.IsVisible = false;
+				textBoxAnswer.IsVisible = false;
+				labelLeft.IsVisible = false;
+				labelRight.IsVisible = false;
+				labelX.IsVisible = false;
+				labelTitle.IsVisible = false;
+			}
+			
+
 		}
 	}
 }
