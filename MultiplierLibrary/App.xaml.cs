@@ -33,6 +33,7 @@ namespace MultiplierLibrary
 		public Multiplier Multiplier;
 		public Results Results;
 		public GameController Game;
+		public NavPage Navigation;
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
@@ -43,7 +44,10 @@ namespace MultiplierLibrary
 			this.Multiplier = new Multiplier();
 			NavPage page = new NavPage();
 			MainPage = page;
+			Navigation = page;
 			this.Game = new GameController(page.ProblemPage);
+
+			Debug.WriteLine($"[DEBUG] background color {page.TabbedPageView.BarBackgroundColor}");
 		}
 
 		protected override void OnStart()
