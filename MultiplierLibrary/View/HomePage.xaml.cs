@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MultiplierLibrary.Controller;
+using MultiplierLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,20 @@ namespace MultiplierLibrary.View
 		public HomePage()
 		{
 			InitializeComponent();
+		}
+
+		private void Switch_PropertyChanged(object sender, ToggledEventArgs e)
+		{
+			Switch Switch = (Switch)sender;
+			Settings.SetProperty(Switch.ClassId, Switch.IsToggled);
+		}
+
+		private void StartButton_Clicked(object sender, EventArgs e)
+		{
+			if(!string.IsNullOrEmpty(UserName.Text))
+			{
+				App.Current.Game.StartNewGame();
+			}
 		}
 	}
 }

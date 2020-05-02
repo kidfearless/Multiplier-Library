@@ -33,6 +33,7 @@ namespace MultiplierLibrary
 		public Multiplier Multiplier;
 		public Results Results;
 		public GameController Game;
+		public NavPage Navigation;
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
@@ -43,12 +44,15 @@ namespace MultiplierLibrary
 			this.Multiplier = new Multiplier();
 			NavPage page = new NavPage();
 			MainPage = page;
+			Navigation = page;
 			this.Game = new GameController(page.ProblemPage);
+
 		}
 
 		protected override void OnStart()
 		{
 			Results.Answers = App.Database.GetProblemsAsync().Result;
+
 			Debug.WriteLine("Got problems");
 		}
 		protected override void OnSleep()
