@@ -47,12 +47,12 @@ namespace MultiplierLibrary
 			Navigation = page;
 			this.Game = new GameController(page.ProblemPage);
 
-			Debug.WriteLine($"[DEBUG] background color {page.TabbedPageView.BarBackgroundColor}");
 		}
 
 		protected override void OnStart()
 		{
 			Results.Answers = App.Database.GetProblemsAsync().Result;
+
 			Debug.WriteLine("Got problems");
 		}
 		protected override void OnSleep()
