@@ -8,43 +8,38 @@
 	<ContentPage.Content>
 		<StackLayout x:Name="layout">
 
-			<Label Text="Welcome to the Multiplication Practice App (title WIP)!"
+			<Label Text="Welcome To Multiplier!"
 				VerticalOptions="Start" 
 				HorizontalOptions="CenterAndExpand"
-				   TextDecorations="Underline"
 				   Margin="0, 20, 15, 5"
 				   FontSize="Small"
 				   FontFamily="Consolas"
 				   x:Name="welcomeLabel"
+				   x:FieldModifier="public"
 				   />
 
-			<Entry Text="Enter Username..."
+			<Entry x:Name="UserName" x:FieldModifier="public" Text="Enter Username..."
 				   HorizontalOptions="Center">
 
 			</Entry>
 			<Grid>
-				<CheckBox Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"></CheckBox>
+				<!-- class id is used as the Properties key so that we don't have to make a new class with a semantic property -->
+				<Switch ClassId="UseWarmup"  x:Name="switchSquares" Toggled="Switch_PropertyChanged" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"></Switch>
 				<Label Grid.Row="0" Grid.Column="1" Text="Squares"></Label>
-				<CheckBox Grid.Row="1" Grid.Column="0" HorizontalOptions="Center"></CheckBox>
+				<Switch ClassId="UseFiveByEven"  x:Name="switchEvens"  Toggled="Switch_PropertyChanged"  Grid.Row="1" Grid.Column="0" HorizontalOptions="Center"></Switch>
 				<Label Grid.Row="1" Grid.Column="1" Text="Evens; ending in 5"></Label>
-				<CheckBox Grid.Row="2" Grid.Column="0" HorizontalOptions="Center"></CheckBox>
+				<Switch ClassId="UseTeens" x:Name="switchTeens"  Toggled="Switch_PropertyChanged"  Grid.Row="2" Grid.Column="0" HorizontalOptions="Center"></Switch>
 				<Label Grid.Row="2" Grid.Column="1" Text="Teens"></Label>
-				<CheckBox Grid.Row="3" Grid.Column="0" HorizontalOptions="Center"></CheckBox>
+				<Switch ClassId="UseNineties"  x:Name="switchNineties"  Toggled="Switch_PropertyChanged"  Grid.Row="3" Grid.Column="0" HorizontalOptions="Center"></Switch>
 				<Label Grid.Row="3" Grid.Column="1" Text="90s"></Label>
 			</Grid>
 
 
 			<Button Text="Start Round!"
-					BackgroundColor="Aqua"
-					TextColor="White"
-					FontAttributes="Bold"
 					HorizontalOptions="Center"
+					Clicked="StartButton_Clicked"
 					>
-				<!--Clicked="OnStartRoundClicked"-->
 			</Button>
-
-			<Button Text="Settings - move me to bottom corner"
-					></Button>
 
 		</StackLayout>
 

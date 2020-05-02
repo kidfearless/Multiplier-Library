@@ -14,10 +14,19 @@ namespace MultiplierLibrary.Controller
 		ProblemsPage page;
 		int correct;
 		int wrong;
+		public string UserName;
 		public GameController(ProblemsPage page)
 		{
 			this.page = page;
 			CreateNewProblem();
+		}
+
+		public void StartNewGame()
+		{
+			correct = 0;
+			wrong = 0;
+			CreateNewProblem();
+			App.Current.Navigation.CurrentPage = page;
 		}
 
 		void CheckAnswer(int answer)
@@ -28,11 +37,13 @@ namespace MultiplierLibrary.Controller
 				this.correct++;
 				page.LabelCorrect.Text = correct.ToString();
 				this.currentProblem.Correct = true;
+				OnAnsweredCorrectly(currentProblem);
 			}
 			else
 			{
 				this.wrong++;
 				page.LabelWrong.Text = wrong.ToString();
+				OnAnsweredWrong(currentProblem);
 			}
 
 			page.LabelTotal.Text = (wrong + correct).ToString();
@@ -60,6 +71,15 @@ namespace MultiplierLibrary.Controller
 
 			// Clear answer
 			textbox.Text = string.Empty;
+		}
+
+		public void OnAnsweredWrong(Problem problem)
+		{
+			
+		}
+		public void OnAnsweredCorrectly(Problem problem)
+		{
+			
 		}
 
 		public void OnProblemSkipped()
