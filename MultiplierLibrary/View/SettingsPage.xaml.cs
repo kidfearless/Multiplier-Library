@@ -1,5 +1,4 @@
 ﻿using MultiplierLibrary.Model;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,8 +50,6 @@ namespace MultiplierLibrary.View
 		{
 			Switch toggle = (Switch)sender;
 			Settings.SetProperty(toggle.ClassId, toggle.IsToggled);
-
-			DisplayAlert("test", "test23", "no cancel");
 		}
 	}
 }

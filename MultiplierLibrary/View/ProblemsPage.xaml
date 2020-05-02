@@ -42,7 +42,7 @@
 					FontSize="36"
 					HorizontalOptions="Center"
 					Text=" Multiply!"
-                    x:Name="labelTitle">
+					x:Name="labelTitle">
 			</Label>
 
 			<!--multiplication labels-->
@@ -57,7 +57,7 @@
 						TextColor="Black"
 						FontSize="50"
 						Text="X"
-                        x:Name="labelX">
+						x:Name="labelX">
 				</Label>
 				<Label	x:Name="labelRight"
 						TextColor="Black"
@@ -78,8 +78,8 @@
 					Text="skip"
 					TextColor="#4D75F7"
 					x:Name="labelSkip"/>
-            
-            <!--Congratulations message / menu-->
+			
+			<!--Congratulations message / menu-->
 				<StackLayout x:Name="CongratStack">
 					<Label x:Name="label1" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="Congratulations!!!"></Label>
 					<Label x:Name="label2" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="The Round is done!"></Label>
@@ -89,8 +89,8 @@
 					<Button x:Name="resultsButton" IsVisible="False" Text="See your results..."></Button>
 				 </StackLayout>
 
-        </StackLayout>
-       
-        
+		</StackLayout>
+	   
+		
 	</ContentPage.Content>
 </ContentPage>
