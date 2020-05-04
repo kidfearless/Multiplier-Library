@@ -13,6 +13,7 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProblemsPage : ContentPage
 	{
+		public Label LabelAnswer => labelAnswer;
 		public Label LabelCorrect => labelCorrect;
 		public Label LabelTotal => labelTotal;
 		public Label LabelWrong => labelWrong;
@@ -20,6 +21,7 @@ namespace MultiplierLibrary.View
 		public Label LabelRight => labelRight;
 		public Entry TextBoxAnswer => textBoxAnswer;
 		public Label LabelSkip => labelSkip;
+
 
 		public ProblemsPage()
 		{
@@ -31,6 +33,7 @@ namespace MultiplierLibrary.View
 
 			// add enter event
 			textBoxAnswer.Completed += OnTextBoxEnter;
+			
 		}
 
 		protected void OnSkipTapped(object sender, EventArgs args)
@@ -44,7 +47,27 @@ namespace MultiplierLibrary.View
 			if(!String.IsNullOrEmpty(textBox.Text) && !String.IsNullOrWhiteSpace(textBox.Text))
 			{
 				App.Current.Game.OnTextBoxEnter(textBox);
+				
+
+				
 			}
 		}
+
+
+		//show Solurion 
+		public void ShowSolution(object sender, EventArgs args)
+		{
+
+				labelL.Text = labelLeft.Text;
+				labelR.Text = labelRight.Text;
+				labelAnswer.Text = LabelAnswer.Text;
+				labelL.IsVisible = true;
+				labelX.IsVisible = true;
+				labelR.IsVisible = true;
+				labelequal.IsVisible = true;
+				labelAnswer.IsVisible = true;
+
+		}
+
 	}
 }
