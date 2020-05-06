@@ -122,8 +122,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(80, 99),
-				Right = random.Next(10, 99)
+				Left = random.Next(80, 100),
+				Right = random.Next(10, 100)
 			};
 
 			return problem;
@@ -135,8 +135,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(40, 59),
-				Right = random.Next(10, 99)
+				Left = random.Next(40, 60),
+				Right = random.Next(10, 100)
 			};
 
 			return problem;
@@ -148,8 +148,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 19),
-				Right = random.Next(10, 99)
+				Left = random.Next(10, 20),
+				Right = random.Next(10, 100)
 			};
 
 			return problem;
@@ -161,8 +161,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(1, 9),
-				Right = random.Next(10, 99)
+				Left = random.Next(1, 10),
+				Right = random.Next(10, 100)
 			};
 
 			return problem;
@@ -174,7 +174,7 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				Left = random.Next(100, 999),
-				Right = random.Next(1, 9)
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -186,8 +186,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 99),
-				Right = random.Next(1, 9)
+				Left = random.Next(10, 10),
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -199,8 +199,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(1, 9),
-				Right = random.Next(1, 9)
+				Left = random.Next(1, 10),
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -209,7 +209,7 @@ namespace MultiplierLibrary.Model
 		public Problem DoWarmup()
 		{
 			Random random = new Random();
-			switch(random.Next(1, 7))
+			switch(random.Next(1, 8))
 			{
 				case 1: return Do1By1();
 				case 2: return Do2By1();
