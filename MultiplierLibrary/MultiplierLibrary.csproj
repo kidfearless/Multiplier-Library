@@ -11,14 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite" Version="3.13.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="LiveXAML" Version="2.1.73" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controller\" />
   </ItemGroup>
 
   <ItemGroup>

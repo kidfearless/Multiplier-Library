@@ -1,5 +1,4 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +7,6 @@ namespace MultiplierLibrary.Model
 {
 	public class Problem
 	{
-		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }
 		public int Left { get; set; }
 		public int Right { get; set; }
@@ -19,5 +17,9 @@ namespace MultiplierLibrary.Model
 			return this.Left * this.Right;
 		}
 
+		public string ToQueryString(int userid)
+		{
+			return $"({Left}, {Right}, {Correct}, {(int)Type}, {userid})";
+		}
 	}
 }
