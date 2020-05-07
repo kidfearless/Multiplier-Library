@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 using MultiplierLibrary.Controller;
+using Plugin.SimpleAudioPlayer;
 
 namespace MultiplierLibrary
 {
@@ -33,11 +34,12 @@ namespace MultiplierLibrary
 		public Multiplier Multiplier;
 		public Results Results;
 		public GameController Game;
+
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
 			App.Current = this;
-
+			
 			InitializeComponent();
 			this.Results = new Results();
 			this.Multiplier = new Multiplier();
