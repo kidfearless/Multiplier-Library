@@ -115,7 +115,58 @@ namespace MultiplierLibrary.Model
 
 			return problem;
 		}
+		//EightyTo100
+		public Problem DoEightyTo100()
+		{
+			Random random = new Random();
 
+			Problem problem = new Problem
+			{
+				Left = random.Next(80, 100),
+				Right = random.Next(10, 100)
+			};
+
+			return problem;
+		}
+		//FourtyToSixty
+		public Problem DoFourtyToSixty()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				Left = random.Next(40, 60),
+				Right = random.Next(10, 100)
+			};
+
+			return problem;
+		}
+		//teens
+		public Problem DoTeens()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				Left = random.Next(10, 20),
+				Right = random.Next(10, 100)
+			};
+
+			return problem;
+		}
+		// 2 digits
+		public Problem Do1By10()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				Left = random.Next(1, 10),
+				Right = random.Next(10, 100)
+			};
+
+			return problem;
+		}
 		public Problem Do3By1()
 		{
 			Random random = new Random();
@@ -123,7 +174,7 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				Left = random.Next(100, 999),
-				Right = random.Next(1, 9)
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -135,8 +186,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 99),
-				Right = random.Next(1, 9)
+				Left = random.Next(10, 10),
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -148,8 +199,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(1, 9),
-				Right = random.Next(1, 9)
+				Left = random.Next(1, 10),
+				Right = random.Next(1, 10)
 			};
 
 			return problem;
@@ -158,11 +209,15 @@ namespace MultiplierLibrary.Model
 		public Problem DoWarmup()
 		{
 			Random random = new Random();
-			switch(random.Next(1, 3))
+			switch(random.Next(1, 8))
 			{
 				case 1: return Do1By1();
 				case 2: return Do2By1();
 				case 3: return Do3By1();
+				case 4: return Do1By10();
+				case 5: return DoTeens();
+				case 6: return DoFourtyToSixty();
+				case 7: return DoEightyTo100();
 				default: return Do1By1();
 			}
 		}
