@@ -98,6 +98,44 @@
 
 		</StackLayout>
 	   
-		
+			<Label HorizontalOptions="Center"
+				   FontSize="24"
+				   Text=""
+				   x:Name="RightAnswer"
+				   />
+			<!--show the solutions-->
+			<!--<Button x:Name="SolutionButton" Text="Solution" FontSize="12" Clicked="ShowSolution" HorizontalOptions="CenterAndExpand"></Button>-->
+			<StackLayout x:Name="ShowSolutionstack" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+			   
+				<Label	x:Name="labelL"
+						IsVisible="False"
+						FontSize="25"
+						Text="2"
+						/>
+
+				<Label	VerticalOptions="CenterAndExpand"
+						x:Name="labelX"
+						IsVisible="False"
+						FontSize="25"
+						Text="X"/>
+
+				<Label	x:Name="labelR"
+						IsVisible="False"
+						FontSize="25"
+						Text="2"/>
+
+				<Label	x:Name="labelequal"
+						IsVisible="False"
+						FontSize="25"
+						Text="="/>
+
+				<Label x:Name="labelAnswer" 
+					   IsVisible="False"
+					   FontSize="25"       
+					   Text=""/>
+
+			</StackLayout>
+
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -36,6 +36,9 @@ namespace MultiplierLibrary.View
 			if(!String.IsNullOrEmpty(textBox.Text) && !String.IsNullOrWhiteSpace(textBox.Text))
 			{
 				App.Current.Game.OnTextBoxEnter(textBox);
+				
+
+				
 			}
 		}
 
@@ -81,5 +84,19 @@ namespace MultiplierLibrary.View
 		{
 			App.Current.Navigation.CurrentPage = App.Current.Navigation.RoundResultsPage;
 		}
+
+		//show Solurion 
+		public void ShowSolution(object sender, EventArgs args)
+		{
+			labelL.Text = labelLeft.Text;
+			labelR.Text = labelRight.Text;
+			labelAnswer.Text = LabelAnswer.Text;
+			labelL.IsVisible = true;
+			labelX.IsVisible = true;
+			labelR.IsVisible = true;
+			labelequal.IsVisible = true;
+			labelAnswer.IsVisible = true;
+		}
+
 	}
 }
