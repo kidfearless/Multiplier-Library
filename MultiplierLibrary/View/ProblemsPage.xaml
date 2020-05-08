@@ -85,7 +85,7 @@
 					TextColor="#4D75F7"
 					x:FieldModifier="public"
 					x:Name="LabelSkip"/>
-			
+
 			<!--Congratulations message / menu-->
 			<StackLayout x:FieldModifier="public" x:Name="CongratStack" IsVisible="False">
 				<Label x:FieldModifier="public"  x:Name="Label1" HorizontalOptions="CenterAndExpand" FontSize="40" TextColor="Black" Text="Congratulations!!!"></Label>
@@ -96,8 +96,6 @@
 				<Button x:FieldModifier="public" Clicked="ResultsButton_Clicked" x:Name="ResultsButton" Text="See your results..."></Button>
 			</StackLayout>
 
-		</StackLayout>
-	   
 			<Label HorizontalOptions="Center"
 				   FontSize="24"
 				   Text=""
@@ -106,50 +104,40 @@
 			<!--show the solutions-->
 			<!--<Button x:Name="SolutionButton" Text="Solution" FontSize="12" Clicked="ShowSolution" HorizontalOptions="CenterAndExpand"></Button>-->
 			<StackLayout x:Name="ShowSolutionstack" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-			   
-				<Label	x:Name="labelL"
+
+				<Label	x:Name="LabelL"
+						x:FieldModifier="public"
 						IsVisible="False"
 						FontSize="25"
 						Text="2"
 						/>
 
 				<Label	VerticalOptions="CenterAndExpand"
-						x:Name="labelX"
+						x:FieldModifier="public"
+						x:Name="Labelx"
 						IsVisible="False"
 						FontSize="25"
 						Text="X"/>
 
-				<Label	x:Name="labelR"
+				<Label	x:Name="LabelR"
+						x:FieldModifier="public"
 						IsVisible="False"
 						FontSize="25"
 						Text="2"/>
 
-				<Label	x:Name="labelequal"
+				<Label	x:Name="Labelequal"
+						x:FieldModifier="public"
 						IsVisible="False"
 						FontSize="25"
 						Text="="/>
 
-				<Label x:Name="labelAnswer" 
+				<Label x:Name="LabelAnswer" 
+						x:FieldModifier="public"
 					   IsVisible="False"
 					   FontSize="25"       
 					   Text=""/>
 
 			</StackLayout>
-
-			<Button x:Name="button1" Clicked="Congratulations" IsVisible="True" Text="touch me"></Button>
-			<Button x:Name="correctButton" Clicked="OnCorrect" Text="Correct"></Button>
-			<Button x:Name="wrongButton" Clicked="OnWrong" Text="Wrong"></Button>
-			
-			<!--Congratulations message / menu-->
-				<StackLayout x:Name="CongratStack">
-					<Label x:Name="label1" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="Congratulations!!!"></Label>
-					<Label x:Name="label2" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="The Round is done!"></Label>
-					<Button x:Name="againButton" IsVisible="False" Text="Go Again?"></Button>
-					<Button x:Name="settingsButton" IsVisible="False" Text="Change Settings"></Button>
-					<Button x:Name="homeButton" IsVisible="False" Text="Home Page"></Button>
-					<Button x:Name="resultsButton" IsVisible="False" Text="See your results..."></Button>
-				 </StackLayout>
-
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

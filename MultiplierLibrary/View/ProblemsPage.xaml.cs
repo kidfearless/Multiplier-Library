@@ -12,6 +12,7 @@ namespace MultiplierLibrary.View
 		ISimpleAudioPlayer congratsPlayer;
 		ISimpleAudioPlayer correctPlayer;
 		ISimpleAudioPlayer wrongPlayer;
+
 		public ProblemsPage()
 		{
 			//loads audio players on page load
@@ -66,33 +67,22 @@ namespace MultiplierLibrary.View
 
 			//button1.IsVisible = false;
 
-			label1.FontSize = 40;
-			label1.TextColor = Color.Black;
-			label2.FontSize = 40;
-			label2.TextColor = Color.Black;
-			settingsButton.IsVisible = true;
-			againButton.IsVisible = true;
-			homeButton.IsVisible = true;
-			resultsButton.IsVisible = true;
+			Label1.FontSize = 40;
+			Label1.TextColor = Color.Black;
+			Label2.FontSize = 40;
+			Label2.TextColor = Color.Black;
+			SettingsButton.IsVisible = true;
+			AgainButton.IsVisible = true;
+			HomeButton.IsVisible = true;
+			ResultsButton.IsVisible = true;
 
-			labelSkip.IsVisible = false;
-			textBoxAnswer.IsVisible = false;
-			labelLeft.IsVisible = false;
-			labelRight.IsVisible = false;
-			labelX.IsVisible = false;
-			labelTitle.IsVisible = false;
-
-
-
+			LabelSkip.IsVisible = false;
+			TextBoxAnswer.IsVisible = false;
+			LabelLeft.IsVisible = false;
+			LabelRight.IsVisible = false;
+			LabelX.IsVisible = false;
+			LabelTitle.IsVisible = false;
 		}
-		public bool isRoundDone = false;
-		public Label LabelCorrect => labelCorrect;
-		public Label LabelTotal => labelTotal;
-		public Label LabelWrong => labelWrong;
-		public Label LabelLeft => labelLeft;
-		public Label LabelRight => labelRight;
-		public Entry TextBoxAnswer => textBoxAnswer;
-		public Label LabelSkip => labelSkip;
 
 		protected void OnSkipTapped(object sender, EventArgs args)
 		{
@@ -105,9 +95,6 @@ namespace MultiplierLibrary.View
 			if(!String.IsNullOrEmpty(textBox.Text) && !String.IsNullOrWhiteSpace(textBox.Text))
 			{
 				App.Current.Game.OnTextBoxEnter(textBox);
-				
-
-				
 			}
 		}
 
@@ -157,14 +144,14 @@ namespace MultiplierLibrary.View
 		//show Solurion 
 		public void ShowSolution(object sender, EventArgs args)
 		{
-			labelL.Text = labelLeft.Text;
-			labelR.Text = labelRight.Text;
-			labelAnswer.Text = LabelAnswer.Text;
-			labelL.IsVisible = true;
-			labelX.IsVisible = true;
-			labelR.IsVisible = true;
-			labelequal.IsVisible = true;
-			labelAnswer.IsVisible = true;
+			LabelL.Text = LabelLeft.Text;
+			LabelR.Text = LabelRight.Text;
+			LabelAnswer.Text = LabelAnswer.Text;
+			LabelL.IsVisible = true;
+			LabelX.IsVisible = true;
+			LabelR.IsVisible = true;
+			Labelequal.IsVisible = true;
+			LabelAnswer.IsVisible = true;
 		}
 	}
 }
