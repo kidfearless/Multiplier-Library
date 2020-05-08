@@ -1,38 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+	<DebugType>portable</DebugType>
+	<DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SQLitePCLRaw.core" Version="2.0.3" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
+	<PackageReference Include="SQLitePCLRaw.core" Version="2.0.3" />
+	<PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
+	<PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.2" />
+	<PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+	<PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
+	<None Remove="Audio\Congrats.mp3" />
+	<None Remove="Audio\Correct.mp3" />
+	<None Remove="Audio\Wrong.mp3" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\NavPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\HomePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\ProblemsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+	<EmbeddedResource Include="Audio\Congrats.mp3" />
+	<EmbeddedResource Include="Audio\Correct.mp3" />
+	<EmbeddedResource Include="Audio\Wrong.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="sqlite" Version="3.13.0" />
+	<PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+	<PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.4.0" />
+	<PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
+	<PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="Controller\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<EmbeddedResource Update="View\NavPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="View\HomePage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="View\MainPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="View\ProblemsPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<EmbeddedResource Update="View\SettingsPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
   </ItemGroup>
 </Project>

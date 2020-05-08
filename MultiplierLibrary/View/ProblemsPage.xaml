@@ -136,6 +136,20 @@
 
 			</StackLayout>
 
+			<Button x:Name="button1" Clicked="Congratulations" IsVisible="True" Text="touch me"></Button>
+			<Button x:Name="correctButton" Clicked="OnCorrect" Text="Correct"></Button>
+			<Button x:Name="wrongButton" Clicked="OnWrong" Text="Wrong"></Button>
+			
+			<!--Congratulations message / menu-->
+				<StackLayout x:Name="CongratStack">
+					<Label x:Name="label1" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="Congratulations!!!"></Label>
+					<Label x:Name="label2" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="The Round is done!"></Label>
+					<Button x:Name="againButton" IsVisible="False" Text="Go Again?"></Button>
+					<Button x:Name="settingsButton" IsVisible="False" Text="Change Settings"></Button>
+					<Button x:Name="homeButton" IsVisible="False" Text="Home Page"></Button>
+					<Button x:Name="resultsButton" IsVisible="False" Text="See your results..."></Button>
+				 </StackLayout>
+
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

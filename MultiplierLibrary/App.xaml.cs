@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 using MultiplierLibrary.Controller;
+using Plugin.SimpleAudioPlayer;
 
 namespace MultiplierLibrary
 {
