@@ -169,9 +169,19 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"CreateNewProblem:");
 
 			this.CurrentProblem = Multiplier.DoWarmup();
-			page.LabelLeft.Text = CurrentProblem.Left.ToString();
-			page.LabelRight.Text = CurrentProblem.Right.ToString();
+			if(new Random().NextDouble() < 0.5)
+			{
+				page.LabelLeft.Text = CurrentProblem.Left.ToString();
+				page.LabelRight.Text = CurrentProblem.Right.ToString();
+			}
+			else
+			{
+				page.LabelLeft.Text = CurrentProblem.Right.ToString();
+				page.LabelRight.Text = CurrentProblem.Left.ToString();
+			}
 		}
+
+
 		/** Query average
 		 * SELECT AVG(Correct), TYPE
 		 * FROM records
