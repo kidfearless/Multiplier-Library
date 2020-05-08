@@ -188,33 +188,57 @@ namespace MultiplierLibrary.Controller
 		 * WHERE USER = 9
 		 * GROUP BY Type			
 		 */
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "<Pending>")]
 		private void PickOldProblem(Types type)
 		{
-			var list = History[type];
+			Debug.WriteLine($"PickOldProblem:");
 
-			/** SELECT AVG(Correct) AS 'AVG_CORRECT', `Left`, `Right`
-				FROM records
-				WHERE USER = 9 AND `Type` = 0
-				GROUP BY `Left`, `Right`
-				HAVING AVG(Correct) < 0.9
-				ORDER BY AVG(Correct)
-			*/
-			//using (SQLiteCommand command = new SQLiteCommand(Database.Connection))
-			//{
-			//	command.CommandText =
-			//		@"SELECT AVG(Correct) AS 'AVG_CORRECT', `Left`, `Right`
-			//		FROM records
-			//		WHERE USER = 9 AND `Type` = 0
-			//		GROUP BY `Left`, `Right`
-			//		HAVING AVG(Correct) < 0.9
-			//		ORDER BY AVG(Correct)";
-			//	SQLiteDataReader reader =  command.ExecuteReader();
-			//	if(reader != null && reader.HasRows)
-			//	{
+			using (SQLiteCommand command = new SQLiteCommand(Database.Connection))
+			{
+				command.CommandText =
+					"SELECT AVG(Correct) AS 'AVG_CORRECT', `Left`, `Right` " +
+					"FROM records " +
+					$"WHERE USER = {this.userID} AND `Type` = {(int)type} " +
+					"GROUP BY `Left`, `Right` " +
+					$"HAVING AVG(Correct) < {Settings.RepeatProblemDropOff} " +
+					$"AND COUNT(Correct) > {Settings.RepeatProblemMinimum} " +
+					"ORDER BY AVG(Correct)";
+				Problem problem;
+				SQLiteDataReader reader =  command.ExecuteReader();
+				if (reader != null && reader.HasRows)
+				{
+					if(reader.Read())
+					{
+						problem = new Problem()
+						{
+							Left = reader.GetInt32(1),
+							Right = reader.GetInt32(2),
+						};
+						Debug.WriteLine($"[DEBUG]: Giving old problem {problem.Left} X {problem.Right}");
+					}
+					else
+					{
+						problem = Multiplier.DoWarmup();
+					}
+				}
+				else
+				{
+					problem = Multiplier.DoWarmup();
+				}
 
-			//	}
-			//}
+				Debug.WriteLine($"[DEBUG]: Giving new problem {problem.Left} X {problem.Right}");
 
+				if (new Random().NextDouble() < 0.5)
+				{
+					page.LabelLeft.Text = CurrentProblem.Left.ToString();
+					page.LabelRight.Text = CurrentProblem.Right.ToString();
+				}
+				else
+				{
+					page.LabelLeft.Text = CurrentProblem.Right.ToString();
+					page.LabelRight.Text = CurrentProblem.Left.ToString();
+				}
+			}
 		}
 
 		public void OnRoundStart()
@@ -287,16 +311,19 @@ namespace MultiplierLibrary.Controller
 					}
 				}
 
-				//if(lowestType == Types.Size)
-				//{
-				//	CreateNewProblem();
-				//}
-				//else
-				//{
-				//	PickOldProblem(lowestType);
-				//}
+				if (lowestType == Types.Size)
+				{
+					CreateNewProblem();
+				}
+				else
+				{
+					PickOldProblem(lowestType);
+				}
 			}
-			CreateNewProblem();
+			else
+			{
+				CreateNewProblem();
+			}
 		}
 
 		public void OnProblemSkipped()
