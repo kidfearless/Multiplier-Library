@@ -17,6 +17,16 @@ namespace MultiplierLibrary.Model
 			}
 			return (bool)App.Current.Properties[value];
 		}
+		
+		private static int GetProperty(string value, int defaultValue)
+		{
+			if (App.Current.Properties[value] == null)
+			{
+				App.Current.Properties[value] = defaultValue;
+			}
+			return (int)App.Current.Properties[value];
+		}
+
 		private static double GetProperty(string value, double defaultValue)
 		{
 			if (App.Current.Properties[value] == null)
@@ -31,16 +41,36 @@ namespace MultiplierLibrary.Model
 			App.Current.Properties[setting] = value;
 			return value;
 		}
+		
+		public static int SetProperty(string setting, int value)
+		{
+			App.Current.Properties[setting] = value;
+			return value;
+		}
 
 		public static double SetProperty(string setting, double value)
 		{
 			App.Current.Properties[setting] = value;
 			return value;
 		}
-
+		// Percentage of old problems to give to the player
 		public static double OldProblemsPercentage
 		{
 			get => GetProperty("OldProblemsPercentage", 0.25);
+			set => SetProperty("OldProblemsPercentage", value);
+		}
+
+		// The average score on a problem to before it's no longer shown as an old problem
+		public static double RepeatProblemDropOff
+		{
+			get => GetProperty("OldProblemsPercentage", 0.9);
+			set => SetProperty("OldProblemsPercentage", value);
+		}
+
+		// The minimum number of times the problem must be answered before we check RepeatProblemDropOff
+		public static int RepeatProblemMinimum
+		{
+			get => GetProperty("OldProblemsPercentage", 10);
 			set => SetProperty("OldProblemsPercentage", value);
 		}
 	}
