@@ -19,19 +19,15 @@ namespace MultiplierLibrary
 
 		
 		public GameController Game;
-		public NavPage Navigation;
 		public App()
 		{
 			Debug.WriteLine("OnConstructed");
 			App.Current = this;
 			Settings.OldProblemsPercentage = 0.25;
 			InitializeComponent();
-			NavPage page = new NavPage();
+			var page = new HomePage();
 			MainPage = page;
-			Navigation = page;
-			this.Game = new GameController(page.ProblemPage);
-
-
+			this.Game = new GameController();
 		}
 
 		protected override void OnStart()

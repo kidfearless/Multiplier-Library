@@ -60,7 +60,6 @@ namespace MultiplierLibrary.View
 		}
 		private void Congratulations(object sender, EventArgs args)
 		{
-
 			congratsPlayer.Play();
 
 
@@ -127,18 +126,18 @@ namespace MultiplierLibrary.View
 
 		private void SettingsButton_Clicked(object sender, EventArgs e)
 		{
-			App.Current.Navigation.CurrentPage = App.Current.Navigation.SettingsPage;
+			//App.Current.Navigation.CurrentPage = App.Current.Navigation.SettingsPage;
 		}
 
 		private void HomeButton_Clicked(object sender, EventArgs e)
 		{
-			App.Current.Navigation.CurrentPage = App.Current.Navigation.HomePage;
+			//App.Current.Navigation.CurrentPage = App.Current.Navigation.HomePage;
 
 		}
 
 		private void ResultsButton_Clicked(object sender, EventArgs e)
 		{
-			App.Current.Navigation.CurrentPage = App.Current.Navigation.RoundResultsPage;
+			//App.Current.Navigation.CurrentPage = App.Current.Navigation.RoundResultsPage;
 		}
 
 		//show Solurion 
