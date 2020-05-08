@@ -35,7 +35,7 @@ namespace MultiplierLibrary.Controller
 	{
 		public Problem CurrentProblem;
 		
-		ProblemsPage page;
+		public ProblemsPage page;
 		List<Problem> RoundProblems;
 		Dictionary<Types, List<Problem>> History;
 		List<Problem> Session;
@@ -85,14 +85,13 @@ namespace MultiplierLibrary.Controller
 			}
 		}
 
-		public GameController(ProblemsPage page)
+		public GameController()
 		{
 			var localData = Environment.SpecialFolder.LocalApplicationData;
 			string path = Path.Combine(Environment.GetFolderPath(localData), "Multiplier.db3");
 			Database = new RecordsDatabase(path);
 
-			Multiplier = new Multiplier();;
-			this.page = page;
+			Multiplier = new Multiplier();
 			RoundProblems = new List<Problem>();
 		}
 
@@ -103,7 +102,6 @@ namespace MultiplierLibrary.Controller
 			this.TotalProblems = 0;
 
 			CreateNewProblem();
-			App.Current.Navigation.CurrentPage = page;
 
 			// wait
 			this.userID = Database.GetUserID(this.UserName);
@@ -123,7 +121,6 @@ namespace MultiplierLibrary.Controller
 
 
 			CreateNewProblem();
-			App.Current.Navigation.CurrentPage = page;
 
 			this.UserName = username;
 

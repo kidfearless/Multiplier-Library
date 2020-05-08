@@ -29,7 +29,7 @@ namespace MultiplierLibrary.View
 		{
 			if(!string.IsNullOrEmpty(UserName.Text))
 			{
-				App.Current.Game.StartNewGame(UserName.Text);
+
 			}
 		}
 	}

@@ -124,7 +124,7 @@ namespace MultiplierLibrary.Data
 				Debug.Fail("[ERROR] Could not read from results set");
 				if (alertErrors)
 				{
-					App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
+				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
 				}
 				return -1;
 			}
@@ -158,7 +158,7 @@ namespace MultiplierLibrary.Data
 				Debug.Fail($"[ERROR] Could not add user '{name}'");
 				if (alertErrors)
 				{
-					App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
+				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
 				}
 				return -1;
 			}
@@ -171,7 +171,7 @@ namespace MultiplierLibrary.Data
 				Debug.Fail("[ERROR] Could not read from second results set");
 				if (alertErrors)
 				{
-					App.Current.Navigation.DisplayAlert("Database Error", $"Could not retreive second result set for username '{name}'", "continue");
+				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not retreive second result set for username '{name}'", "continue");
 				}
 				return -1;
 			}
