@@ -31,10 +31,11 @@ namespace MultiplierLibrary
 			Debug.WriteLine($"[DEBUG] background color: {this.BarBackgroundColor}");
 
 			CurrentPageChanged += NavPage_CurrentPageChanged;
+
 		}
 
 		private void NavPage_CurrentPageChanged(object sender, EventArgs e)
-		{			
+		{
 		}
 	}
 }

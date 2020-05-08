@@ -6,7 +6,7 @@
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.HomePage">
 	<ContentPage.Content>
-		<StackLayout x:Name="layout">
+		<StackLayout x:Name="layout" HorizontalOptions="FillAndExpand" >
 
 			<Label Text="Welcome To Multiplier!"
 				VerticalOptions="Start" 
@@ -18,26 +18,42 @@
 				   x:FieldModifier="public"
 				   />
 
-			<Entry x:Name="UserName" x:FieldModifier="public" Text="Enter Username..."
-				   HorizontalOptions="Center">
+			<Entry x:Name="UserName" x:FieldModifier="public" Placeholder="Enter Your Username...">
 
 			</Entry>
+
 			<Grid>
 				<!-- class id is used as the Properties key so that we don't have to make a new class with a semantic property -->
-				<Switch ClassId="UseWarmup"  x:Name="switchSquares" Toggled="Switch_PropertyChanged" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center"></Switch>
-				<Label Grid.Row="0" Grid.Column="1" Text="Squares"></Label>
-				<Switch ClassId="UseFiveByEven"  x:Name="switchEvens"  Toggled="Switch_PropertyChanged"  Grid.Row="1" Grid.Column="0" HorizontalOptions="Center"></Switch>
-				<Label Grid.Row="1" Grid.Column="1" Text="Evens; ending in 5"></Label>
-				<Switch ClassId="UseTeens" x:Name="switchTeens"  Toggled="Switch_PropertyChanged"  Grid.Row="2" Grid.Column="0" HorizontalOptions="Center"></Switch>
-				<Label Grid.Row="2" Grid.Column="1" Text="Teens"></Label>
-				<Switch ClassId="UseNineties"  x:Name="switchNineties"  Toggled="Switch_PropertyChanged"  Grid.Row="3" Grid.Column="0" HorizontalOptions="Center"></Switch>
-				<Label Grid.Row="3" Grid.Column="1" Text="90s"></Label>
+				<!--OneByOne-->
+				<Switch ClassId="OneByOne" x:Name="switchOneByOne" Toggled="Switch_PropertyChanged"
+						Grid.Row="0" Grid.Column="0" HorizontalOptions="Center">
+				</Switch>
+				<Label Grid.Row="0" Grid.Column="1" Text="One By One">
+				</Label>
+				<!--TwoByOne-->
+				<Switch ClassId="TwoByOne" x:Name="switchTwoByOne" Toggled="Switch_PropertyChanged" 
+						Grid.Row="1" Grid.Column="0" HorizontalOptions="Center">
+				</Switch>
+				<Label Grid.Row="1" Grid.Column="1" Text="Two By One">
+				</Label>
+				<!--ThreeByOne-->
+				<Switch ClassId="ThreeByOne" x:Name="switchThreeByOne" Toggled="Switch_PropertyChanged"
+						Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
+				</Switch>
+				<Label Grid.Row="2" Grid.Column="1" Text="Three By One">
+				</Label>
+				<!--Factored-->
+				<Switch ClassId="Factored"  x:Name="switchFactored" Toggled="Switch_PropertyChanged" 
+						Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
+				</Switch>
+				<Label Grid.Row="3" Grid.Column="1" Text="Factors">
+				</Label>
 			</Grid>
 
 
 			<Button Text="Start Round!"
 					HorizontalOptions="Center"
-					Clicked="StartButton_Clicked"
+					Clicked="StartButton_Clicked" Padding="5"
 					>
 			</Button>
 

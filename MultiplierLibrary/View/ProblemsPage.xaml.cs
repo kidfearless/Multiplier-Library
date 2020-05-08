@@ -13,30 +13,21 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProblemsPage : ContentPage
 	{
-		public bool isRoundDone = false;
-		public Label LabelCorrect => labelCorrect;
-		public Label LabelTotal => labelTotal;
-		public Label LabelWrong => labelWrong;
-		public Label LabelLeft => labelLeft;
-		public Label LabelRight => labelRight;
-		public Entry TextBoxAnswer => textBoxAnswer;
-		public Label LabelSkip => labelSkip;
-
 		public ProblemsPage()
 		{
 			InitializeComponent();
 			// Add skip event
 			TapGestureRecognizer tap = new TapGestureRecognizer();
 			tap.Tapped += OnSkipTapped;
-			labelSkip.GestureRecognizers.Add(tap);
+			LabelSkip.GestureRecognizers.Add(tap);
 
 			// add enter event
-			textBoxAnswer.Completed += OnTextBoxEnter;
+			TextBoxAnswer.Completed += OnTextBoxEnter;
 		}
 
 		protected void OnSkipTapped(object sender, EventArgs args)
 		{
-
+			App.Current.Game.OnProblemSkipped();
 		}
 
 		protected void OnTextBoxEnter(object sender, EventArgs args)
@@ -48,28 +39,47 @@ namespace MultiplierLibrary.View
 			}
 		}
 
-		private void Congratulations(object sender, EventArgs args)
+		public void OnRoundStart()
 		{
-			if (isRoundDone)
-			{
-				label1.FontSize = 40;
-				label1.TextColor = Color.Black;
-				label2.FontSize = 40;
-				label2.TextColor = Color.Black;
-				settingsButton.IsVisible = true;
-				againButton.IsVisible = true;
-				homeButton.IsVisible = true;
-				resultsButton.IsVisible = true;
+			#region Hide Congrats
+			CongratStack.IsVisible = false;
+			ScoreboardLayout.IsVisible = true;
 
-				labelSkip.IsVisible = false;
-				textBoxAnswer.IsVisible = false;
-				labelLeft.IsVisible = false;
-				labelRight.IsVisible = false;
-				labelX.IsVisible = false;
-				labelTitle.IsVisible = false;
-			}
-			
+			LabelSkip.IsVisible = true;
+			TextBoxAnswer.IsVisible = true;
+			#endregion
+		}
 
+		public void OnRoundEnd()
+		{
+			#region Show Congrats
+			CongratStack.IsVisible = true;
+			ScoreboardLayout.IsVisible = false;
+
+			LabelSkip.IsVisible = false;
+			TextBoxAnswer.IsVisible = false;
+			#endregion
+		}
+
+		private void AgainButton_Clicked(object sender, EventArgs e)
+		{
+			App.Current.Game.StartNewGame();
+		}
+
+		private void SettingsButton_Clicked(object sender, EventArgs e)
+		{
+			App.Current.Navigation.CurrentPage = App.Current.Navigation.SettingsPage;
+		}
+
+		private void HomeButton_Clicked(object sender, EventArgs e)
+		{
+			App.Current.Navigation.CurrentPage = App.Current.Navigation.HomePage;
+
+		}
+
+		private void ResultsButton_Clicked(object sender, EventArgs e)
+		{
+			App.Current.Navigation.CurrentPage = App.Current.Navigation.RoundResultsPage;
 		}
 	}
 }

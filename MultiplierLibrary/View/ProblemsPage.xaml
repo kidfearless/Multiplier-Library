@@ -9,10 +9,10 @@
 	<ContentPage.Content>
 		<StackLayout Padding="10, 20, 10, 0">
 			<!--scoreboard-->
-			<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+			<StackLayout x:Name="ScoreboardLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Start">
 					<Label FontSize="24"  TextColor="Green" Text="Correct"></Label>
-					<Label FontSize="24" TextColor="Green" Text="0" x:Name="labelCorrect"></Label>
+					<Label FontSize="24" TextColor="Green" Text="0" x:FieldModifier="public" x:Name="LabelCorrect"></Label>
 				</StackLayout>
 				<StackLayout Orientation="Horizontal"
 							 HorizontalOptions="CenterAndExpand">
@@ -21,7 +21,8 @@
 					</Label>
 					<Label	FontSize="24"
 							Text="0"
-							x:Name="labelTotal">
+							x:FieldModifier="public"
+							x:Name="LabelTotal">
 					</Label>
 				</StackLayout>
 				<StackLayout Orientation="Horizontal" HorizontalOptions="End">
@@ -32,7 +33,8 @@
 					<Label	FontSize="24"
 							TextColor="Red"
 							Text="0"
-							x:Name="labelWrong">
+							x:FieldModifier="public"
+							x:Name="LabelWrong">
 					</Label>
 				</StackLayout>
 			</StackLayout>
@@ -42,12 +44,14 @@
 					FontSize="36"
 					HorizontalOptions="Center"
 					Text=" Multiply!"
-					x:Name="labelTitle">
+					x:FieldModifier="public"
+					x:Name="LabelTitle">
 			</Label>
 
 			<!--multiplication labels-->
 			<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-				<Label	x:Name="labelLeft"
+				<Label	x:Name="LabelLeft"
+						x:FieldModifier="public"
 						TextColor="Black"
 						FontSize="72"
 						Text="2"
@@ -57,9 +61,11 @@
 						TextColor="Black"
 						FontSize="50"
 						Text="X"
-						x:Name="labelX">
+						x:FieldModifier="public"
+						x:Name="LabelX">
 				</Label>
-				<Label	x:Name="labelRight"
+				<Label	x:Name="LabelRight"
+						x:FieldModifier="public"
 						TextColor="Black"
 						FontSize="72"
 						Text="2">
@@ -67,7 +73,7 @@
 			</StackLayout>
 
 			<!--text box-->
-			<Entry x:Name="textBoxAnswer" ScaleX="1" Keyboard="Numeric" IsTextPredictionEnabled="False" IsTabStop="True" IsSpellCheckEnabled="False"/>
+			<Entry x:Name="TextBoxAnswer" x:FieldModifier="public" ScaleX="1" Keyboard="Numeric" IsTextPredictionEnabled="False" IsTabStop="True" IsSpellCheckEnabled="False"/>
 
 
 
@@ -77,17 +83,18 @@
 					FontSize="18"
 					Text="skip"
 					TextColor="#4D75F7"
-					x:Name="labelSkip"/>
+					x:FieldModifier="public"
+					x:Name="LabelSkip"/>
 			
 			<!--Congratulations message / menu-->
-				<StackLayout x:Name="CongratStack">
-					<Label x:Name="label1" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="Congratulations!!!"></Label>
-					<Label x:Name="label2" HorizontalOptions="CenterAndExpand" FontSize="0" TextColor="White" Text="The Round is done!"></Label>
-					<Button x:Name="againButton" IsVisible="False" Text="Go Again?"></Button>
-					<Button x:Name="settingsButton" IsVisible="False" Text="Change Settings"></Button>
-					<Button x:Name="homeButton" IsVisible="False" Text="Home Page"></Button>
-					<Button x:Name="resultsButton" IsVisible="False" Text="See your results..."></Button>
-				 </StackLayout>
+			<StackLayout x:FieldModifier="public" x:Name="CongratStack" IsVisible="False">
+				<Label x:FieldModifier="public"  x:Name="Label1" HorizontalOptions="CenterAndExpand" FontSize="40" TextColor="Black" Text="Congratulations!!!"></Label>
+				<Label x:FieldModifier="public"  x:Name="Label2" HorizontalOptions="CenterAndExpand" FontSize="40" TextColor="Black" Text="The Round is done!"></Label>
+				<Button x:FieldModifier="public" Clicked="AgainButton_Clicked" x:Name="AgainButton" Text="Go Again?"></Button>
+				<Button x:FieldModifier="public" Clicked="SettingsButton_Clicked" x:Name="SettingsButton" Text="Change Settings"></Button>
+				<Button x:FieldModifier="public" Clicked="HomeButton_Clicked" x:Name="HomeButton" Text="Home Page"></Button>
+				<Button x:FieldModifier="public" Clicked="ResultsButton_Clicked" x:Name="ResultsButton" Text="See your results..."></Button>
+			</StackLayout>
 
 		</StackLayout>
 	   
