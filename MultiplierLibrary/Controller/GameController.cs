@@ -1,7 +1,6 @@
 ﻿using MultiplierLibrary.Data;
 using MultiplierLibrary.Model;
 using MultiplierLibrary.View;
-using System.Data.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 using System.Reflection;
+using System.Threading.Tasks;
 
 
 // TODO: Pulling problems that were answered poorly from the database to give to the player when they answer a question
@@ -40,10 +40,9 @@ namespace MultiplierLibrary.Controller
 		Dictionary<Types, List<Problem>> History;
 		List<Problem> Session;
 		Multiplier Multiplier;
-		Results Results;
 		RecordsDatabase Database;
 		int _correct;
-		int correct
+		int Correct
 		{
 			get => _correct;
 			set
@@ -87,34 +86,32 @@ namespace MultiplierLibrary.Controller
 
 		public GameController()
 		{
-			var localData = Environment.SpecialFolder.LocalApplicationData;
-			string path = Path.Combine(Environment.GetFolderPath(localData), "Multiplier.db3");
 			Database = new RecordsDatabase();
 
 			Multiplier = new Multiplier();
 			RoundProblems = new List<Problem>();
 		}
 
-		public void StartNewGame()
+		public async void StartNewGame()
 		{
-			this.correct = 0;
+			this.Correct = 0;
 			this.Wrong = 0;
 			this.TotalProblems = 0;
 
 			CreateNewProblem();
 
 			// wait
-			this.userID = Database.GetUserID(this.UserName);
+			this.userID = await Database.GetUserID(this.UserName);
 			Debug.WriteLine($"[DEBUG] got userid {this.userID}");
 
 			Session = new List<Problem>();
-			History = Database.GetProblemHistory(this.userID);
+			History = await Database.GetProblemHistory(this.userID);
 			OnRoundStart();
 		}
 
-		public void StartNewGame(string username)
+		public async void StartNewGame(string username)
 		{
-			this.correct = 0;
+			this.Correct = 0;
 			this.Wrong = 0;
 			this.TotalProblems = 0;
 
@@ -124,19 +121,13 @@ namespace MultiplierLibrary.Controller
 			this.UserName = username;
 
 			// wait
-			this.userID = Database.GetUserID(this.UserName);
+			this.userID = await Database.GetUserID(this.UserName);
 			Debug.WriteLine($"[DEBUG] got userid {this.userID}");
 
 			Session = new List<Problem>();
-			History = Database.GetProblemHistory(this.userID);
+			History = await Database.GetProblemHistory(this.userID);
 
 			OnRoundStart();
-		}
-		Stream GetStreamFromFile(string filename)
-		{
-			var assembly = typeof(App).GetTypeInfo().Assembly;
-			var stream = assembly.GetManifestResourceStream("YourApp." + filename);
-			return stream;
 		}
 
 
@@ -145,8 +136,8 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"CheckAnswer:");
 			if(this.CurrentProblem.GetAnswer() == answer)
 			{
-				this.correct++;
-				this.CurrentProblem.Correct = true;
+				this.Correct++;
+				this.CurrentProblem.Correct = 1;
 				OnAnsweredCorrectly(CurrentProblem);
 			}
 			else
@@ -165,75 +156,16 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"CreateNewProblem:");
 
 			this.CurrentProblem = Multiplier.DoWarmup();
+			this.CurrentProblem.UserID = this.userID;
 			if(new Random().NextDouble() < 0.5)
 			{
-				page.LabelLeft.Text = CurrentProblem.Left.ToString();
-				page.LabelRight.Text = CurrentProblem.Right.ToString();
+				page.LabelLeft.Text = CurrentProblem.LeftHand.ToString();
+				page.LabelRight.Text = CurrentProblem.RightHand.ToString();
 			}
 			else
 			{
-				page.LabelLeft.Text = CurrentProblem.Right.ToString();
-				page.LabelRight.Text = CurrentProblem.Left.ToString();
-			}
-		}
-
-
-		/** Query average
-		 * SELECT AVG(Correct), TYPE
-		 * FROM records
-		 * WHERE USER = 9
-		 * GROUP BY Type			
-		 */
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Security", "CA2100:Review SQL queries for security vulnerabilities", Justification = "<Pending>")]
-		private void PickOldProblem(Types type)
-		{
-			Debug.WriteLine($"PickOldProblem:");
-
-			using (SQLiteCommand command = new SQLiteCommand(Database.Connection))
-			{
-				command.CommandText =
-					"SELECT AVG(Correct) AS 'AVG_CORRECT', `Left`, `Right` " +
-					"FROM records " +
-					$"WHERE USER = {this.userID} AND `Type` = {(int)type} " +
-					"GROUP BY `Left`, `Right` " +
-					$"HAVING AVG(Correct) < {Settings.RepeatProblemDropOff} " +
-					$"AND COUNT(Correct) > {Settings.RepeatProblemMinimum} " +
-					"ORDER BY AVG(Correct)";
-				Problem problem;
-				SQLiteDataReader reader =  command.ExecuteReader();
-				if (reader != null && reader.HasRows)
-				{
-					if(reader.Read())
-					{
-						problem = new Problem()
-						{
-							Left = reader.GetInt32(1),
-							Right = reader.GetInt32(2),
-						};
-						Debug.WriteLine($"[DEBUG]: Giving old problem {problem.Left} X {problem.Right}");
-					}
-					else
-					{
-						problem = Multiplier.DoWarmup();
-					}
-				}
-				else
-				{
-					problem = Multiplier.DoWarmup();
-				}
-
-				Debug.WriteLine($"[DEBUG]: Giving new problem {problem.Left} X {problem.Right}");
-
-				if (new Random().NextDouble() < 0.5)
-				{
-					page.LabelLeft.Text = CurrentProblem.Left.ToString();
-					page.LabelRight.Text = CurrentProblem.Right.ToString();
-				}
-				else
-				{
-					page.LabelLeft.Text = CurrentProblem.Right.ToString();
-					page.LabelRight.Text = CurrentProblem.Left.ToString();
-				}
+				page.LabelLeft.Text = CurrentProblem.RightHand.ToString();
+				page.LabelRight.Text = CurrentProblem.LeftHand.ToString();
 			}
 		}
 
@@ -247,7 +179,7 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"OnRoundEnd:");
 
-			Database.SaveRound(this.userID, this.Session);
+			Database.SaveRound(this.Session);
 
 			page.OnRoundEnd();
 		}
@@ -275,7 +207,7 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"OnAnsweredCorrectly:");
 		}
 
-		public void OnAnsweredPost(Problem oldProblem)
+		public async void OnAnsweredPost(Problem oldProblem)
 		{
 			Debug.WriteLine($"OnAnsweredPost:");
 			Session.Add(oldProblem);
@@ -287,44 +219,29 @@ namespace MultiplierLibrary.Controller
 
 			if(new Random().NextDouble() <= Settings.OldProblemsPercentage)
 			{
-				double lowestValue = 1.0;
-				Types lowestType = Types.Size;
+				var list = await Database.GetWorstProblems(this.userID);
 
-				for (Types type = 0; type < Types.Size; type++)
+				if(list?.Count > 0)
 				{
-					if (!History.ContainsKey(type))
+					var item = list[0];
+					CurrentProblem = new Problem
 					{
-						continue;
-					}
-
-					var list = History[type];
-
-					var avg = list.Average(problem => problem.Correct? 1 : 0);
-					if(avg < lowestValue && type != LastType)
-					{
-						lowestType = type;
-						lowestValue = avg;
-					}
-				}
-
-				if (lowestType == Types.Size)
-				{
-					CreateNewProblem();
-				}
-				else
-				{
-					PickOldProblem(lowestType);
+						ID = 0,
+						LeftHand = item.LeftHand,
+						RightHand = item.RightHand,
+						UserID  = item.UserID,
+						Type = item.Type
+					};
+					return;
 				}
 			}
-			else
-			{
-				CreateNewProblem();
-			}
+
+			CreateNewProblem();
 		}
 
 		public void OnProblemSkipped()
 		{
-			Debug.WriteLine($"OnProblemSkipped: {this.CurrentProblem.Left} X {this.CurrentProblem.Right}");
+			Debug.WriteLine($"OnProblemSkipped: {this.CurrentProblem.LeftHand} X {this.CurrentProblem.RightHand}");
 			CreateNewProblem();
 		}
 	}

@@ -32,374 +32,70 @@ namespace MultiplierLibrary.Data
 
 		public RecordsDatabase()
 		{
-			InitializeAsync().Wait();
+			InitializeAsync().SafeFireAndForget(false);
 		}
 
 		async Task InitializeAsync()
 		{
 			if (!initialized)
 			{
-				if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Problem).Name))
+				//await Database.CreateTablesAsync(CreateFlags.None, typeof(Problem)).ConfigureAwait(false);
+				await Database.ExecuteAsync(@"CREATE TABLE IF NOT EXISTS `UserTable` ( 
+					`ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+					`UserName` VARCHAR(32) NOT NULL UNIQUE)");
+
+				await Database.ExecuteAsync(@"CREATE TABLE IF NOT EXISTS `records` (
+					`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+					`LeftHand`	INTEGER NOT NULL,
+					`RightHand`	INTEGER NOT NULL,
+					`Correct`	INTEGER NOT NULL,
+					`Type`	INTEGER NOT NULL,
+					`UserID`	INTEGER NOT NULL,
+					FOREIGN KEY(`UserID`) REFERENCES `UserTable`(`ID`));");
+				initialized = true;
+			}
+		}
+
+		public Task<int> GetUserID(string userName)
+		{
+			return Database.ExecuteScalarAsync<int>("SELECT ID FROM UserTable WHERE UserName = '?'", userName);
+		}
+
+		internal async Task<Dictionary<Types, List<Problem>>> GetProblemHistory(int userID)
+		{
+			Dictionary<Types, List<Problem>> history = new Dictionary<Types, List<Problem>>();
+			var list = await Database.QueryAsync<Problem>("SELECT * FROM records WHERE UserID = ?", userID);
+			foreach (Problem problem in list)
+			{
+				if(!history.ContainsKey(problem.Type))
 				{
-					//await Database.CreateTablesAsync(CreateFlags.None, typeof(Problem)).ConfigureAwait(false);
-					await Database.ExecuteAsync(@"CREATE TABLE IF NOT EXISTS `users` ( 
-						`ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-						`UserName` VARCHAR(32) NOT NULL UNIQUE");
-
-					await Database.ExecuteAsync(@"CREATE TABLE IF NOT EXISTS `records` (
-						`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-						`Left`	INTEGER NOT NULL,
-						`Right`	INTEGER NOT NULL,
-						`Correct`	INTEGER NOT NULL,
-						`Type`	INTEGER NOT NULL,
-						`User`	INTEGER NOT NULL,
-						FOREIGN KEY(`User`) REFERENCES `user`(`ID`));");
-					initialized = true;
-				}
-			}
-		}
-
-		internal int GetUserID(string userName)
-		{
-			throw new NotImplementedException();
-		}
-
-		internal Dictionary<Types, List<Problem>> GetProblemHistory(int userID)
-		{
-			throw new NotImplementedException();
-		}
-
-		internal void SaveRound(int userID, List<Problem> session)
-		{
-			throw new NotImplementedException();
-		}
-		/*
-public Dictionary<Types, List<Problem>> GetProblemHistory(int id)
-{
-SQLiteDataReader reader;
-// GET USER
-using (SQLiteCommand command = new SQLiteCommand(Connection))
-{
-command.CommandText =
-   "SELECT ID, Left, Right, Correct, Type FROM records " +
-   $"WHERE User = '{id}';";
-
-// Get a reader
-reader = command.ExecuteReader();
-Dictionary<Types, List<Problem>> results = new Dictionary<Types, List<Problem>>();
-if (reader != null && reader.HasRows)
-{
-   while (reader.Read())
-   {
-	   Problem problem = new Problem
-	   {
-		   ID = reader.GetInt32(0),
-		   Left = reader.GetInt32(1),
-		   Right = reader.GetInt32(2),
-		   Correct = reader.GetInt32(3) != 0,
-		   Type = (Types)reader.GetInt32(4)
-	   };
-
-	   if (!results.ContainsKey(problem.Type))
-	   {
-		   results[problem.Type] = new List<Problem>();
-	   }
-
-	   results[problem.Type].Add(problem);
-   }
-}
-return results;
-}
-}
-
-public int GetUserID(string name)
-{
-name = StringSanitizer.Sanitize(name);
-SQLiteDataReader reader;
-// GET USER
-using (SQLiteCommand command = new SQLiteCommand(Connection))
-{
-command.CommandText =
-   "SELECT ID FROM users " +
-   $"WHERE UserName = '{name}';";
-
-// Get a reader
-reader = command.ExecuteReader();
-}
-// IF WE FAILED TO GET A USER
-if (reader == null || !reader.HasRows)
-{
-return InsertNewUserID(name);
-}
-
-// RETURN THE USER IF WE CAN
-if (reader.Read())
-{
-return reader.GetInt32(0);
-}
-else
-{
-Debug.Fail("[ERROR] Could not read from results set");
-if (alertErrors)
-{
-   //	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
-}
-return -1;
-}
-}
-
-private int InsertNewUserID(string name)
-{
-// CREATE A USER
-using (SQLiteCommand command = new SQLiteCommand(Connection))
-{
-command.CommandText =
-   "INSERT INTO users " +
-   "(UserName) " +
-   "VALUES " +
-   $"('{name}');";
-var results = command.ExecuteNonQuery();
-}
-SQLiteDataReader reader;
-// GET USER
-using (SQLiteCommand command = new SQLiteCommand(Connection))
-{
-command.CommandText =
-"SELECT ID FROM users " +
-$"WHERE UserName = '{name}';";
-
-reader = command.ExecuteReader();
-}
-// WE'VE FAILED THEM
-if (reader == null || !reader.HasRows)
-{
-Debug.Fail($"[ERROR] Could not add user '{name}'");
-if (alertErrors)
-{
-   //	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
-}
-return -1;
-}
-else if (reader.Read())
-{
-return reader.GetInt32(0);
-}
-else
-{
-Debug.Fail("[ERROR] Could not read from second results set");
-if (alertErrors)
-{
-   //	App.Current.Navigation.DisplayAlert("Database Error", $"Could not retreive second result set for username '{name}'", "continue");
-}
-return -1;
-}
-}
-
-public void SaveRound(int userID, List<Problem> session)
-{
-using (SQLiteCommand command = new SQLiteCommand(Connection))
-{
-var text = @"INSERT INTO `records`
-   (Left, Right, Correct, Type, User)
-   VALUES ";
-
-for (int i = 0; i < session.Count - 1; i++)
-{
-   text += session[i].ToQueryString(userID) + ",\n";
-}
-
-text += session[session.Count - 1].ToQueryString(userID) + ";";
-
-command.CommandText = text;
-
-command.ExecuteNonQuery();
-}
-}*/
-	}
-
-	/**
-	class RecordsDatabase
-	{
-		const bool debug = true;
-		const bool alertErrors = true;
-		public SQLiteConnection Connection;
-
-		public RecordsDatabase(string path)
-		{
-			string datasource = $"Data Source='{path}';";
-			Connection = new SQLiteConnection(datasource);
-			Connection.Open();
-
-			// CREATE USERS
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-					@"CREATE TABLE IF NOT EXISTS `users` ( 
-						`ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-						`UserName` VARCHAR ( 32 ) NOT NULL UNIQUE
-					)";
-
-				command.ExecuteNonQuery();
-			}
-			// CREATE RECORDS
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-					@"CREATE TABLE IF NOT EXISTS `records` (
-						`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-						`Left`	INTEGER NOT NULL,
-						`Right`	INTEGER NOT NULL,
-						`Correct`	INTEGER NOT NULL,
-						`Type`	INTEGER NOT NULL,
-						`User`	INTEGER NOT NULL,
-						FOREIGN KEY(`User`) REFERENCES `user`(`ID`)
-					);";
-
-				command.ExecuteNonQuery();
-			}
-		}
-
-		public Dictionary<Types, List<Problem>> GetProblemHistory(int id)
-		{
-			SQLiteDataReader reader;
-			// GET USER
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-					"SELECT ID, Left, Right, Correct, Type FROM records " +
-					$"WHERE User = '{id}';";
-
-				// Get a reader
-				reader = command.ExecuteReader();
-				Dictionary<Types, List<Problem>> results = new Dictionary<Types, List<Problem>>();
-				if(reader != null && reader.HasRows)
-				{
-					while (reader.Read())
-					{
-						Problem problem = new Problem
-						{
-							ID = reader.GetInt32(0),
-							Left = reader.GetInt32(1),
-							Right = reader.GetInt32(2),
-							Correct = reader.GetInt32(3) != 0,
-							Type = (Types)reader.GetInt32(4)
-						};
-
-						if(!results.ContainsKey(problem.Type))
-						{
-							results[problem.Type] = new List<Problem>();
-						}
-
-						results[problem.Type].Add(problem);
-					}
-				}
-				return results;
-			}
-		}
-
-		public int GetUserID(string name)
-		{
-			name = StringSanitizer.Sanitize(name);
-			SQLiteDataReader reader;
-			// GET USER
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-					"SELECT ID FROM users " +
-					$"WHERE UserName = '{name}';";
-
-				// Get a reader
-				reader = command.ExecuteReader();
-			}
-			// IF WE FAILED TO GET A USER
-			if (reader == null || !reader.HasRows)
-			{
-				return InsertNewUserID(name);
-			}
-				
-			// RETURN THE USER IF WE CAN
-			if(reader.Read())
-			{
-				return reader.GetInt32(0);
-			}
-			else
-			{
-				Debug.Fail("[ERROR] Could not read from results set");
-				if (alertErrors)
-				{
-				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
-				}
-				return -1;
-			}
-		}
-
-		private int InsertNewUserID(string name)
-		{
-			// CREATE A USER
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-					"INSERT INTO users " +
-					"(UserName) " +
-					"VALUES " +
-					$"('{name}');";
-				var results = command.ExecuteNonQuery();
-			}
-			SQLiteDataReader reader;
-			// GET USER
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				command.CommandText =
-				"SELECT ID FROM users " +
-				$"WHERE UserName = '{name}';";
-
-				reader = command.ExecuteReader();
-			}
-			// WE'VE FAILED THEM
-			if (reader == null || !reader.HasRows)
-			{
-				Debug.Fail($"[ERROR] Could not add user '{name}'");
-				if (alertErrors)
-				{
-				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not add user '{name}'", "continue");
-				}
-				return -1;
-			}
-			else if (reader.Read())
-			{
-				return reader.GetInt32(0);
-			}
-			else
-			{
-				Debug.Fail("[ERROR] Could not read from second results set");
-				if (alertErrors)
-				{
-				//	App.Current.Navigation.DisplayAlert("Database Error", $"Could not retreive second result set for username '{name}'", "continue");
-				}
-				return -1;
-			}
-		}
-
-		public void SaveRound(int userID, List<Problem> session)
-		{
-			using (SQLiteCommand command = new SQLiteCommand(Connection))
-			{
-				var text = @"INSERT INTO `records`
-					(Left, Right, Correct, Type, User)
-					VALUES ";
-
-				for (int i = 0; i < session.Count-1; i++)
-				{
-					text += session[i].ToQueryString(userID) + ",\n";
+					history[problem.Type] = new List<Problem>();
 				}
 
-				text += session[session.Count - 1].ToQueryString(userID) + ";";
-
-				command.CommandText = text;
-
-				command.ExecuteNonQuery();
+				history[problem.Type].Add(problem);
 			}
+
+			return history;
+		}
+
+		internal void SaveRound(List<Problem> session)
+		{
+			//session.ForEach((problem) => problem.ID = 0);
+			Database.InsertAllAsync(session);
+		}
+
+		public async Task<List<UserStats>> GetWorstProblems(int userID)
+		{
+			Debug.WriteLine($"GetWorstProblems:");
+
+			return await Database.QueryAsync<UserStats>("SELECT AVG(Correct) AS 'Average', `LeftHand`, `RightHand`, `Type`, `UserID` " +
+					"FROM records " +
+					"WHERE UserID = ? " +
+					"GROUP BY LeftHand, RightHand, Type " +
+					"HAVING AVG(Correct) < ? " +
+					"AND COUNT(Correct) > ? " +
+					"ORDER BY AVG(Correct)",
+					userID, Settings.RepeatProblemDropOff, Settings.RepeatProblemMinimum);
 		}
 	}
-	*/
 }

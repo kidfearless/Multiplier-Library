@@ -110,8 +110,8 @@ namespace MultiplierLibrary.Model
 			var array = Factors[key];
 			// Get a random number from the lower half
 			int index = random.Next(0, array.Length/2);
-			problem.Left = array[index];
-			problem.Right = array[array.Length - index];
+			problem.LeftHand = array[index];
+			problem.RightHand = array[array.Length - index];
 
 			return problem;
 		}
@@ -122,8 +122,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(80, 100),
-				Right = random.Next(10, 100)
+				LeftHand = random.Next(80, 100),
+				RightHand = random.Next(10, 100)
 			};
 
 			return problem;
@@ -135,8 +135,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(40, 60),
-				Right = random.Next(10, 100)
+				LeftHand = random.Next(40, 60),
+				RightHand = random.Next(10, 100)
 			};
 
 			return problem;
@@ -148,8 +148,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 20),
-				Right = random.Next(10, 100)
+				LeftHand = random.Next(10, 20),
+				RightHand = random.Next(10, 100)
 			};
 
 			return problem;
@@ -161,8 +161,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(1, 10),
-				Right = random.Next(10, 100)
+				LeftHand = random.Next(1, 10),
+				RightHand = random.Next(10, 100)
 			};
 
 			return problem;
@@ -173,8 +173,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(100, 999),
-				Right = random.Next(1, 10)
+				LeftHand = random.Next(100, 999),
+				RightHand = random.Next(1, 10)
 			};
 
 			return problem;
@@ -186,8 +186,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(10, 10),
-				Right = random.Next(1, 10)
+				LeftHand = random.Next(10, 10),
+				RightHand = random.Next(1, 10)
 			};
 
 			return problem;
@@ -199,8 +199,8 @@ namespace MultiplierLibrary.Model
 
 			Problem problem = new Problem
 			{
-				Left = random.Next(1, 10),
-				Right = random.Next(1, 10)
+				LeftHand = random.Next(1, 10),
+				RightHand = random.Next(1, 10)
 			};
 
 			return problem;

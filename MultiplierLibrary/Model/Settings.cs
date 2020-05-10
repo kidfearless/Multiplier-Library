@@ -11,7 +11,7 @@ namespace MultiplierLibrary.Model
 
 		private static bool GetProperty(string value, bool defaultValue)
 		{
-			if (App.Current.Properties[value] == null)
+			if (!App.Current.Properties.ContainsKey(value))
 			{
 				App.Current.Properties[value] = defaultValue;
 			}
@@ -20,7 +20,7 @@ namespace MultiplierLibrary.Model
 		
 		private static int GetProperty(string value, int defaultValue)
 		{
-			if (App.Current.Properties[value] == null)
+			if (!App.Current.Properties.ContainsKey(value))
 			{
 				App.Current.Properties[value] = defaultValue;
 			}
@@ -29,7 +29,7 @@ namespace MultiplierLibrary.Model
 
 		private static double GetProperty(string value, double defaultValue)
 		{
-			if (App.Current.Properties[value] == null)
+			if (!App.Current.Properties.ContainsKey(value))
 			{
 				App.Current.Properties[value] = defaultValue;
 			}
@@ -70,8 +70,8 @@ namespace MultiplierLibrary.Model
 		// The minimum number of times the problem must be answered before we check RepeatProblemDropOff
 		public static int RepeatProblemMinimum
 		{
-			get => GetProperty("OldProblemsPercentage", 10);
-			set => SetProperty("OldProblemsPercentage", value);
+			get => GetProperty("RepeatProblemMinimum", 10);
+			set => SetProperty("RepeatProblemMinimum", value);
 		}
 	}
 }
