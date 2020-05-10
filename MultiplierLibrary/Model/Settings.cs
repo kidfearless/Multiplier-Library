@@ -4,11 +4,20 @@ using System.Text;
 
 namespace MultiplierLibrary.Model
 {
+	public class SettingsChangedEventArgs : EventArgs
+	{
+		public string SettingChanged { get; set; }
+		public object NewValue;
+	}
 	public static class Settings
 	{
 		// ensures no null values get returned causing an exception
 
 		public static IDictionary<string, object> Properties { get => App.Current.Properties; }
+
+		
+
+		public static event EventHandler<SettingsChangedEventArgs> SettingChanged;
 
 		private static bool GetProperty(string value, bool defaultValue)
 		{
@@ -39,18 +48,21 @@ namespace MultiplierLibrary.Model
 
 		public static bool SetProperty(string setting, bool value)
 		{
+			SettingChanged?.Invoke(null, new SettingsChangedEventArgs() { SettingChanged = setting, NewValue = value });
 			App.Current.Properties[setting] = value;
 			return value;
 		}
 		
 		public static int SetProperty(string setting, int value)
 		{
+			SettingChanged?.Invoke(null, new SettingsChangedEventArgs() { SettingChanged = setting, NewValue = value });
 			App.Current.Properties[setting] = value;
 			return value;
 		}
 
 		public static double SetProperty(string setting, double value)
 		{
+			SettingChanged?.Invoke(null, new SettingsChangedEventArgs() { SettingChanged = setting, NewValue = value });
 			App.Current.Properties[setting] = value;
 			return value;
 		}
