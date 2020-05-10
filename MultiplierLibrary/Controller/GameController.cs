@@ -89,7 +89,7 @@ namespace MultiplierLibrary.Controller
 		{
 			var localData = Environment.SpecialFolder.LocalApplicationData;
 			string path = Path.Combine(Environment.GetFolderPath(localData), "Multiplier.db3");
-			Database = new RecordsDatabase(path);
+			Database = new RecordsDatabase();
 
 			Multiplier = new Multiplier();
 			RoundProblems = new List<Problem>();

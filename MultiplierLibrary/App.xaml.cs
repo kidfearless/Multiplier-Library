@@ -25,9 +25,9 @@ namespace MultiplierLibrary
 			App.Current = this;
 			Settings.OldProblemsPercentage = 0.25;
 			InitializeComponent();
+			this.Game = new GameController();
 			var page = new HomePage();
 			MainPage = page;
-			this.Game = new GameController();
 		}
 
 		protected override void OnStart()
