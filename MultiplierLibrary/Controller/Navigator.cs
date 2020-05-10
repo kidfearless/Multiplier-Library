@@ -13,7 +13,7 @@ namespace MultiplierLibrary.Controller
 		{
 			ProblemsPage page = new ProblemsPage();
 			App.Current.MainPage = page;
-			App.Current.Game.page = page;
+			App.Current.Game.Page = page;
 			App.Current.Game.StartNewGame(userName);
 		}
 
@@ -21,20 +21,20 @@ namespace MultiplierLibrary.Controller
 		{
 			ProblemsPage page = new ProblemsPage();
 			App.Current.MainPage = page;
-			App.Current.Game.page = page;
+			App.Current.Game.Page = page;
 			App.Current.Game.StartNewGame();
 		}
 
 		public static void GoToProblemsPage()
 		{
-			App.Current.MainPage = App.Current.Game.page;
+			App.Current.MainPage = App.Current.Game.Page;
 		}
 
 		public static void GoHome()
 		{
 			HomePage page = new HomePage();
 			App.Current.MainPage = page;
-			App.Current.Game.page = null;
+			App.Current.Game.Page = null;
 		}
 
 		public static void CheckResults()

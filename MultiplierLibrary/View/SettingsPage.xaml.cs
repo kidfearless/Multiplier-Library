@@ -59,7 +59,7 @@ namespace MultiplierLibrary.View
 		}
 		public void ReturnButtonClicked(object sender, EventArgs e)
 		{
-			if(App.Current.Game.page != null)
+			if(App.Current.Game.Page != null)
 			{
 				Navigator.GoToProblemsPage();
 			}

@@ -12,8 +12,6 @@ using System.Diagnostics;
 using SQLite;
 using System.Linq;
 
-#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
-
 namespace MultiplierLibrary.Data
 {
 	[Preserve]
@@ -56,9 +54,15 @@ namespace MultiplierLibrary.Data
 			}
 		}
 
-		public Task<int> GetUserID(string userName)
+		public async Task<int> GetUserID(string userName)
 		{
-			return Database.ExecuteScalarAsync<int>("SELECT ID FROM UserTable WHERE UserName = '?'", userName);
+			int id = await Database.ExecuteScalarAsync<int>("SELECT ID FROM UserTable WHERE UserName = ?", userName);
+			if (id == 0)
+			{
+				await Database.ExecuteScalarAsync<int>("INSERT INTO UserTable (UserName) VALUES (?)", userName);
+				return await Database.ExecuteScalarAsync<int>("SELECT ID FROM UserTable WHERE UserName = ?", userName);
+			}
+			return id;
 		}
 
 		internal async Task<Dictionary<Types, List<Problem>>> GetProblemHistory(int userID)
@@ -78,10 +82,16 @@ namespace MultiplierLibrary.Data
 			return history;
 		}
 
-		internal void SaveRound(List<Problem> session)
+		internal async void SaveRound(List<Problem> session)
 		{
-			//session.ForEach((problem) => problem.ID = 0);
-			Database.InsertAllAsync(session);
+			string query =
+			@"INSERT INTO records (LeftHand, RightHand, Correct, Type, UserID) VALUES ";
+			foreach (var problem in session)
+			{
+				query += problem.ToQueryString() + ", ";
+			}
+			query = query.Substring(0, query.Length - 2);
+			await Database.ExecuteAsync(query);
 		}
 
 		public async Task<List<UserStats>> GetWorstProblems(int userID)

@@ -8,6 +8,7 @@ namespace MultiplierLibrary.Model
 	{
 		// ensures no null values get returned causing an exception
 
+		public static IDictionary<string, object> Properties { get => App.Current.Properties; }
 
 		private static bool GetProperty(string value, bool defaultValue)
 		{

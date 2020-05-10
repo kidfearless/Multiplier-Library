@@ -112,6 +112,7 @@ namespace MultiplierLibrary.Model
 			int index = random.Next(0, array.Length/2);
 			problem.LeftHand = array[index];
 			problem.RightHand = array[array.Length - index];
+			problem.Type = Types.Factored;
 
 			return problem;
 		}
@@ -123,7 +124,9 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(80, 100),
-				RightHand = random.Next(10, 100)
+				RightHand = random.Next(10, 100),
+				Type = Types.EightyTo100Squared
+
 			};
 
 			return problem;
@@ -136,7 +139,8 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(40, 60),
-				RightHand = random.Next(10, 100)
+				RightHand = random.Next(10, 100),
+				Type = Types.FourtiesToSixties
 			};
 
 			return problem;
@@ -149,24 +153,13 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(10, 20),
-				RightHand = random.Next(10, 100)
+				RightHand = random.Next(10, 100),
+				Type = Types.Teens
 			};
 
 			return problem;
 		}
 		// 2 digits
-		public Problem Do1By10()
-		{
-			Random random = new Random();
-
-			Problem problem = new Problem
-			{
-				LeftHand = random.Next(1, 10),
-				RightHand = random.Next(10, 100)
-			};
-
-			return problem;
-		}
 		public Problem Do3By1()
 		{
 			Random random = new Random();
@@ -174,7 +167,8 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(100, 999),
-				RightHand = random.Next(1, 10)
+				RightHand = random.Next(1, 10),
+				Type = Types.ThreeByOne
 			};
 
 			return problem;
@@ -187,7 +181,8 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(10, 10),
-				RightHand = random.Next(1, 10)
+				RightHand = random.Next(1, 10),
+				Type = Types.TwoByOne
 			};
 
 			return problem;
@@ -200,7 +195,8 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(1, 10),
-				RightHand = random.Next(1, 10)
+				RightHand = random.Next(1, 10),
+				Type = Types.OneByOne
 			};
 
 			return problem;
@@ -214,7 +210,6 @@ namespace MultiplierLibrary.Model
 				case 1: return Do1By1();
 				case 2: return Do2By1();
 				case 3: return Do3By1();
-				case 4: return Do1By10();
 				case 5: return DoTeens();
 				case 6: return DoFourtyToSixty();
 				case 7: return DoEightyTo100();

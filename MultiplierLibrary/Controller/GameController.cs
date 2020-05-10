@@ -35,12 +35,13 @@ namespace MultiplierLibrary.Controller
 	{
 		public Problem CurrentProblem;
 		
-		public ProblemsPage page;
+		public ProblemsPage Page;
 		List<Problem> RoundProblems;
 		Dictionary<Types, List<Problem>> History;
 		List<Problem> Session;
 		Multiplier Multiplier;
 		RecordsDatabase Database;
+		#region Primitives
 		int _correct;
 		int Correct
 		{
@@ -48,7 +49,7 @@ namespace MultiplierLibrary.Controller
 			set
 			{
 				_correct = value;
-				page.LabelCorrect.Text = _correct.ToString();
+				Page.LabelCorrect.Text = _correct.ToString();
 			}
 		}
 		int _wrong;
@@ -58,7 +59,7 @@ namespace MultiplierLibrary.Controller
 			set
 			{
 				_wrong = value;
-				page.LabelWrong.Text = _wrong.ToString();
+				Page.LabelWrong.Text = _wrong.ToString();
 			}
 		}
 		int _totalProblems;
@@ -68,7 +69,7 @@ namespace MultiplierLibrary.Controller
 			set
 			{
 				_totalProblems = value;
-				page.LabelTotal.Text = _totalProblems.ToString();
+				Page.LabelTotal.Text = _totalProblems.ToString();
 			}
 		}
 		int userID;
@@ -83,6 +84,7 @@ namespace MultiplierLibrary.Controller
 				username = StringSanitizer.Sanitize(value);
 			}
 		}
+		#endregion
 
 		public GameController()
 		{
@@ -101,7 +103,7 @@ namespace MultiplierLibrary.Controller
 			CreateNewProblem();
 
 			// wait
-			this.userID = await Database.GetUserID(this.UserName);
+			this.CurrentProblem.UserID =  this.userID = await Database.GetUserID(this.UserName);
 			Debug.WriteLine($"[DEBUG] got userid {this.userID}");
 
 			Session = new List<Problem>();
@@ -109,44 +111,23 @@ namespace MultiplierLibrary.Controller
 			OnRoundStart();
 		}
 
-		public async void StartNewGame(string username)
+		public void StartNewGame(string username)
 		{
-			this.Correct = 0;
-			this.Wrong = 0;
-			this.TotalProblems = 0;
-
-
-			CreateNewProblem();
-
 			this.UserName = username;
-
-			// wait
-			this.userID = await Database.GetUserID(this.UserName);
-			Debug.WriteLine($"[DEBUG] got userid {this.userID}");
-
-			Session = new List<Problem>();
-			History = await Database.GetProblemHistory(this.userID);
-
-			OnRoundStart();
+			StartNewGame();
 		}
-
 
 		void CheckAnswer(int answer)
 		{
 			Debug.WriteLine($"CheckAnswer:");
 			if(this.CurrentProblem.GetAnswer() == answer)
 			{
-				this.Correct++;
-				this.CurrentProblem.Correct = 1;
 				OnAnsweredCorrectly(CurrentProblem);
 			}
 			else
 			{
-				this.Wrong++;
 				OnAnsweredWrong(CurrentProblem);
 			}
-
-			this.TotalProblems++;
 
 			OnAnsweredPost(CurrentProblem);
 		}
@@ -159,29 +140,30 @@ namespace MultiplierLibrary.Controller
 			this.CurrentProblem.UserID = this.userID;
 			if(new Random().NextDouble() < 0.5)
 			{
-				page.LabelLeft.Text = CurrentProblem.LeftHand.ToString();
-				page.LabelRight.Text = CurrentProblem.RightHand.ToString();
+				Page.LabelLeft.Text = CurrentProblem.LeftHand.ToString();
+				Page.LabelRight.Text = CurrentProblem.RightHand.ToString();
 			}
 			else
 			{
-				page.LabelLeft.Text = CurrentProblem.RightHand.ToString();
-				page.LabelRight.Text = CurrentProblem.LeftHand.ToString();
+				Page.LabelLeft.Text = CurrentProblem.RightHand.ToString();
+				Page.LabelRight.Text = CurrentProblem.LeftHand.ToString();
 			}
 		}
 
 		public void OnRoundStart()
 		{
 			Debug.WriteLine($"OnRoundStart:");
-			page.OnRoundStart();
+			Page.OnRoundStart();
 		}
 		
 		public void OnRoundEnd()
 		{
 			Debug.WriteLine($"OnRoundEnd:");
+			
 
 			Database.SaveRound(this.Session);
 
-			page.OnRoundEnd();
+			Page.OnRoundEnd();
 		}
 
 		public void OnTextBoxEnter(Entry textbox)
@@ -200,17 +182,23 @@ namespace MultiplierLibrary.Controller
 		public void OnAnsweredWrong(Problem problem)
 		{
 			Debug.WriteLine($"OnAnsweredWrong:");
+			this.Wrong++;
 		}
 
 		public void OnAnsweredCorrectly(Problem problem)
 		{
 			Debug.WriteLine($"OnAnsweredCorrectly:");
+			this.Correct++;
+			this.CurrentProblem.Correct = 1;
 		}
 
 		public async void OnAnsweredPost(Problem oldProblem)
 		{
 			Debug.WriteLine($"OnAnsweredPost:");
+
+			this.TotalProblems++;
 			Session.Add(oldProblem);
+
 			if(this.TotalProblems >= this.maxProblems)
 			{
 				OnRoundEnd();
