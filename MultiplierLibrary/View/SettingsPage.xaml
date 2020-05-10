@@ -5,5 +5,8 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.SettingsPage">
-
+    <ContentPage.Content>
+        
+        <!--<Button x:FieldModifier="public" Clicked="ReturnClick" x:Name="ReturnButton" Text="Save Settings"></Button>-->
+    </ContentPage.Content>
 </ContentPage>

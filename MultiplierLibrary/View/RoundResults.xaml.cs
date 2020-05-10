@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MultiplierLibrary.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,16 @@ namespace MultiplierLibrary.View
             InitializeComponent();
 
         }
+        public void OnReturnClicked(object sender, EventArgs e)
+        {
+            Navigator.GoToProblemsPage();
+        }
+
+        public void OnAgainClicked(object sender, EventArgs e)
+        {
+            Navigator.StartGame();
+        }
     }
+
+    
 }

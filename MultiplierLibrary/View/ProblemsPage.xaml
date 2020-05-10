@@ -85,6 +85,7 @@
 					TextColor="#4D75F7"
 					x:FieldModifier="public"
 					x:Name="LabelSkip"/>
+            <Button Text="Quit Game" Clicked="HomeButton_Clicked"></Button>
 
 			<!--Congratulations message / menu-->
 			<StackLayout x:FieldModifier="public" x:Name="CongratStack" IsVisible="False">

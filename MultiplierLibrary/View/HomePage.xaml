@@ -51,13 +51,18 @@
 			</Grid>
 
 
-			<Button Text="Start Round!"
-					HorizontalOptions="Center"
-					Clicked="StartButton_Clicked" Padding="5"
-					>
+			<Button 
+                Text="Start Round!"
+				HorizontalOptions="Center"
+				Clicked="StartButton_Clicked" Padding="5">
 			</Button>
 
-		</StackLayout>
+            <Button
+                Text = "More Settings"
+                Clicked="SettingsButton_Clicked">
+            </Button>
+
+        </StackLayout>
 
 	</ContentPage.Content>
 </ContentPage>

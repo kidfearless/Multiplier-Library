@@ -29,8 +29,13 @@ namespace MultiplierLibrary.View
 		{
 			if(!string.IsNullOrEmpty(UserName.Text))
 			{
-
+				Navigator.StartGame(UserName.Text);
 			}
+		}
+
+		private void SettingsButton_Clicked(object sender, EventArgs e)
+		{
+			Navigator.GoToSettings();
 		}
 	}
 }

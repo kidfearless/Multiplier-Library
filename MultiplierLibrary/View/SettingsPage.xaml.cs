@@ -1,4 +1,5 @@
-﻿using MultiplierLibrary.Model;
+﻿using MultiplierLibrary.Controller;
+using MultiplierLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +21,15 @@ namespace MultiplierLibrary.View
 			ScrollView scroll = new ScrollView();
 
 			Grid grid = new Grid();
-			
+			StackLayout stack = new StackLayout();
+			Button returnButton = new Button()
+			{
+				Text = "Return"
+
+			};
+			returnButton.Clicked += ReturnButtonClicked;
+			//grid.Children.Insert(0, returnButton);
+			//grid.Children.AddHorizontal(returnButton);
 
 			for (Types type = 0; type < Types.Size; type++)
 			{
@@ -38,12 +47,26 @@ namespace MultiplierLibrary.View
 				};
 				Switch.Toggled += Switch_Toggled;
 
-				grid.Children.Add(label, 0, (int)type);
-				grid.Children.Add(Switch, 1, (int)type);
+				grid.Children.Add(label, 0, (int)type+1);
+				grid.Children.Add(Switch, 1, (int)type+1);
 			}
+			stack.Children.Insert(0, returnButton);
+			stack.Children.Insert(1, grid);  
+			scroll.Content = stack;
+			this.Content = scroll;
+			
 
-			scroll.Content = grid;
-			this.Content = scroll; 
+		}
+		public void ReturnButtonClicked(object sender, EventArgs e)
+		{
+			if(App.Current.Game.page != null)
+			{
+				Navigator.GoToProblemsPage();
+			}
+			else
+			{
+				Navigator.GoHome();
+			}
 		}
 
 		private void Switch_Toggled(object sender, ToggledEventArgs e)
@@ -51,5 +74,11 @@ namespace MultiplierLibrary.View
 			Switch toggle = (Switch)sender;
 			Settings.SetProperty(toggle.ClassId, toggle.IsToggled);
 		}
-	}
-}
+
+		
+
+		
+			//Navigator.GoToProblemsPage();
+		
+
+} }

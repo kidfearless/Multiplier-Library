@@ -109,7 +109,6 @@ namespace MultiplierLibrary.Controller
 
 			Session = new List<Problem>();
 			History = Database.GetProblemHistory(this.userID);
-
 			OnRoundStart();
 		}
 

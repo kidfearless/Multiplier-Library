@@ -4,6 +4,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Reflection;
 using System.IO;
+using MultiplierLibrary.Controller;
+
 namespace MultiplierLibrary.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -126,17 +128,21 @@ namespace MultiplierLibrary.View
 
 		private void SettingsButton_Clicked(object sender, EventArgs e)
 		{
+			Navigator.GoToSettings();
 			//App.Current.Navigation.CurrentPage = App.Current.Navigation.SettingsPage;
 		}
 
 		private void HomeButton_Clicked(object sender, EventArgs e)
 		{
+			Navigator.GoHome();
+			
 			//App.Current.Navigation.CurrentPage = App.Current.Navigation.HomePage;
 
 		}
 
 		private void ResultsButton_Clicked(object sender, EventArgs e)
 		{
+			Navigator.CheckResults();
 			//App.Current.Navigation.CurrentPage = App.Current.Navigation.RoundResultsPage;
 		}
 
