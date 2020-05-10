@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Xamarin.Forms;
+using Switch = Xamarin.Forms.Switch;
+
 namespace MultiplierLibrary.Model
 {
+	// Linked switch provides a self contained interface for linking switches to a corresponding setting.
+	// All while propagating the changes to other switches
 	class LinkedSwitch : Switch
 	{
 		public static readonly BindableProperty LinkedProperty = BindableProperty.Create(
 														 propertyName: "LinkedPropertyText",
 														 returnType: typeof(string),
 														 declaringType: typeof(LinkedSwitch),
-														 defaultValue: "",
 														 defaultBindingMode: BindingMode.TwoWay,
 														 propertyChanged: LinkedPropertyChanged);
 
@@ -33,17 +37,33 @@ namespace MultiplierLibrary.Model
 				{
 					Settings.SettingChanged -= linked.LinkedSwitch_SettingChanged;
 				}
-			}
-			catch (Exception)
-			{
 
-				
+				if(newValue != null)
+				{
+					linked.IsToggled = Settings.GetProperty((string)newValue, true);
+				}
+			}
+			catch (Exception e)
+			{
+				Debug.Fail($"[ERROR] Caught exception {e}");
 			}
 		}
 
 		public LinkedSwitch()
 		{
+			this.Toggled += LinkedSwitch_Toggled;
+		}
 
+		public void LinkedSwitch_Toggled(object sender, ToggledEventArgs e)
+		{
+			if(string.IsNullOrEmpty(this.LinkedPropertyText))
+			{
+				Debug.Fail("[ERROR] LinkedSwitch was toggled without a linked setting");
+			}
+			else
+			{
+				Settings.SetProperty(this.LinkedPropertyText, e.Value);
+			}
 		}
 
 		public LinkedSwitch(string property)

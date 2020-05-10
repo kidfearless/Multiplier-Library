@@ -19,7 +19,7 @@ namespace MultiplierLibrary.Model
 
 		public static event EventHandler<SettingsChangedEventArgs> SettingChanged;
 
-		private static bool GetProperty(string value, bool defaultValue)
+		public static bool GetProperty(string value, bool defaultValue)
 		{
 			if (!App.Current.Properties.ContainsKey(value))
 			{
@@ -27,8 +27,8 @@ namespace MultiplierLibrary.Model
 			}
 			return (bool)App.Current.Properties[value];
 		}
-		
-		private static int GetProperty(string value, int defaultValue)
+
+		public static int GetProperty(string value, int defaultValue)
 		{
 			if (!App.Current.Properties.ContainsKey(value))
 			{
@@ -37,7 +37,7 @@ namespace MultiplierLibrary.Model
 			return (int)App.Current.Properties[value];
 		}
 
-		private static double GetProperty(string value, double defaultValue)
+		public static double GetProperty(string value, double defaultValue)
 		{
 			if (!App.Current.Properties.ContainsKey(value))
 			{

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="clr-namespace:MultiplierLibrary.Model"
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.HomePage">
 	<ContentPage.Content>
@@ -25,44 +25,44 @@
 			<Grid>
 				<!-- class id is used as the Properties key so that we don't have to make a new class with a semantic property -->
 				<!--OneByOne-->
-				<Switch ClassId="OneByOne" x:Name="switchOneByOne" Toggled="Switch_PropertyChanged"
+				<model:LinkedSwitch LinkedPropertyText="OneByOne"
 						Grid.Row="0" Grid.Column="0" HorizontalOptions="Center">
-				</Switch>
+				</model:LinkedSwitch>
 				<Label Grid.Row="0" Grid.Column="1" Text="One By One">
 				</Label>
 				<!--TwoByOne-->
-				<Switch ClassId="TwoByOne" x:Name="switchTwoByOne" Toggled="Switch_PropertyChanged" 
+				<model:LinkedSwitch LinkedPropertyText="TwoByOne"
 						Grid.Row="1" Grid.Column="0" HorizontalOptions="Center">
-				</Switch>
+				</model:LinkedSwitch>
 				<Label Grid.Row="1" Grid.Column="1" Text="Two By One">
 				</Label>
 				<!--ThreeByOne-->
-				<Switch ClassId="ThreeByOne" x:Name="switchThreeByOne" Toggled="Switch_PropertyChanged"
+				<model:LinkedSwitch LinkedPropertyText="ThreeByOne"
 						Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
-				</Switch>
+				</model:LinkedSwitch>
 				<Label Grid.Row="2" Grid.Column="1" Text="Three By One">
 				</Label>
 				<!--Factored-->
-				<Switch ClassId="Factored"  x:Name="switchFactored" Toggled="Switch_PropertyChanged" 
+				<model:LinkedSwitch LinkedPropertyText="Factored" 
 						Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
-				</Switch>
+				</model:LinkedSwitch>
 				<Label Grid.Row="3" Grid.Column="1" Text="Factors">
 				</Label>
 			</Grid>
 
 
 			<Button 
-                Text="Start Round!"
+				Text="Start Round!"
 				HorizontalOptions="Center"
 				Clicked="StartButton_Clicked" Padding="5">
 			</Button>
 
-            <Button
-                Text = "More Settings"
-                Clicked="SettingsButton_Clicked">
-            </Button>
+			<Button
+				Text = "More Settings"
+				Clicked="SettingsButton_Clicked">
+			</Button>
 
-        </StackLayout>
+		</StackLayout>
 
 	</ContentPage.Content>
 </ContentPage>
