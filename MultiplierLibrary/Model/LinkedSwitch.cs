@@ -68,7 +68,13 @@ namespace MultiplierLibrary.Model
 		{
 			this.Toggled += LinkedSwitch_Toggled;
 		}
-		public LinkedSwitch(string property, bool DefaultValue = true)
+		public LinkedSwitch(string property)
+		{
+			this.LinkedProperty = property;
+			Settings.SettingChanged += LinkedSwitch_SettingChanged;
+			this.IsToggled = Settings.GetProperty(property, true);
+		}
+		public LinkedSwitch(string property, bool DefaultValue)
 		{
 			this.LinkedProperty = property;
 			Settings.SettingChanged += LinkedSwitch_SettingChanged;
