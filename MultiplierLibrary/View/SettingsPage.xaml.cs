@@ -37,7 +37,7 @@ namespace MultiplierLibrary.View
 				{
 					FontSize = 24,
 					Text = type.ToString(),
-					HorizontalOptions = LayoutOptions.Center
+					HorizontalOptions = LayoutOptions.Center,
 				};
 
 				LinkedSwitch Switch = new LinkedSwitch(type.ToString());

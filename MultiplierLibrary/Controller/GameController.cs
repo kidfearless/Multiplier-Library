@@ -183,7 +183,7 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"OnAnsweredWrong:");
 			this.Wrong++;
-			page.OnWrong();
+			Page.OnWrong();
 		}
 
 		public void OnAnsweredCorrectly(Problem problem)
@@ -191,7 +191,7 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"OnAnsweredCorrectly:");
 			this.Correct++;
 			this.CurrentProblem.Correct = 1;
-			page.OnCorrect();
+			Page.OnCorrect();
 		}
 
 		public async void OnAnsweredPost(Problem oldProblem)
