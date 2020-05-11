@@ -268,11 +268,13 @@ namespace MultiplierLibrary.Controller
 		public void OnAnsweredWrong(Problem problem)
 		{
 			Debug.WriteLine($"OnAnsweredWrong:");
+			page.OnWrong();
 		}
 
 		public void OnAnsweredCorrectly(Problem problem)
 		{
 			Debug.WriteLine($"OnAnsweredCorrectly:");
+			page.OnCorrect();
 		}
 
 		public void OnAnsweredPost(Problem oldProblem)

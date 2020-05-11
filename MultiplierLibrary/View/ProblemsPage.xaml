@@ -49,7 +49,7 @@
 			</Label>
 
 			<!--multiplication labels-->
-			<StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+			<StackLayout x:Name="numStack" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 				<Label	x:Name="LabelLeft"
 						x:FieldModifier="public"
 						TextColor="Black"
@@ -85,7 +85,7 @@
 					TextColor="#4D75F7"
 					x:FieldModifier="public"
 					x:Name="LabelSkip"/>
-            <Button Text="Quit Game" Clicked="HomeButton_Clicked"></Button>
+            <Button x:Name="qButton" Text="Quit Game" Clicked="HomeButton_Clicked"></Button>
 
 			<!--Congratulations message / menu-->
 			<StackLayout x:FieldModifier="public" x:Name="CongratStack" IsVisible="False">
@@ -139,6 +139,7 @@
 					   Text=""/>
 
 			</StackLayout>
+            <Button x:Name="testButton" Text="No Sound" Clicked="testButtonClicked"></Button>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 using System.Reflection;
 using System.IO;
 using MultiplierLibrary.Controller;
+using MultiplierLibrary.Model;
 
 namespace MultiplierLibrary.View
 {
@@ -51,16 +52,26 @@ namespace MultiplierLibrary.View
 			return stream;
 		}
 		//test method for 'correct' audio
-		private void OnCorrect(object sender, EventArgs args)
+		public void OnCorrect()
 		{
-			correctPlayer.Play();
+			if (Settings.ShouldPlaySound)
+			{
+				correctPlayer.Play();
+			}
+			
 		}
+
+
 		//test method for 'wrong' audio
-		private void OnWrong(object sender, EventArgs args)
+		public void OnWrong()
 		{
-			wrongPlayer.Play();
+			if (Settings.ShouldPlaySound)
+			{
+				wrongPlayer.Play();
+			}
+			
 		}
-		private void Congratulations(object sender, EventArgs args)
+		private void Congratulations()
 		{
 			congratsPlayer.Play();
 
@@ -113,13 +124,22 @@ namespace MultiplierLibrary.View
 		public void OnRoundEnd()
 		{
 			#region Show Congrats
+			if (Settings.ShouldPlaySound)
+			{
+				congratsPlayer.Play();
+			}
+			
+			qButton.IsVisible = false;
 			CongratStack.IsVisible = true;
-			ScoreboardLayout.IsVisible = false;
+			//ScoreboardLayout.IsVisible = false;
 
+			numStack.IsVisible = false;
 			LabelSkip.IsVisible = false;
 			TextBoxAnswer.IsVisible = false;
 			#endregion
 		}
+
+	
 
 		private void AgainButton_Clicked(object sender, EventArgs e)
 		{
@@ -157,6 +177,11 @@ namespace MultiplierLibrary.View
 			LabelR.IsVisible = true;
 			Labelequal.IsVisible = true;
 			LabelAnswer.IsVisible = true;
+		}
+
+		public void testButtonClicked(object sender, EventArgs args)
+		{
+			Settings.ShouldPlaySound = false;
 		}
 	}
 }

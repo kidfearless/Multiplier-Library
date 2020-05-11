@@ -73,5 +73,10 @@ namespace MultiplierLibrary.Model
 			get => GetProperty("OldProblemsPercentage", 10);
 			set => SetProperty("OldProblemsPercentage", value);
 		}
+		public static bool ShouldPlaySound
+		{
+			get => GetProperty("ShouldPlaySound", true);
+			set => SetProperty("ShouldPlaySound", value);
+		}
 	}
 }
