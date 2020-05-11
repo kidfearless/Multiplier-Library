@@ -19,12 +19,6 @@ namespace MultiplierLibrary.View
 			InitializeComponent();
 		}
 
-		private void Switch_PropertyChanged(object sender, ToggledEventArgs e)
-		{
-			Switch Switch = (Switch)sender;
-			Settings.SetProperty(Switch.ClassId, Switch.IsToggled);
-		}
-
 		private void StartButton_Clicked(object sender, EventArgs e)
 		{
 			if(!string.IsNullOrEmpty(UserName.Text))

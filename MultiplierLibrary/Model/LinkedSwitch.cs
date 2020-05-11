@@ -11,17 +11,32 @@ namespace MultiplierLibrary.Model
 	// All while propagating the changes to other switches
 	class LinkedSwitch : Switch
 	{
-		public static readonly BindableProperty LinkedProperty = BindableProperty.Create(
-														 propertyName: "LinkedPropertyText",
+		public static readonly BindableProperty LinkedBindableProperty = BindableProperty.Create(
+														 propertyName: nameof(LinkedProperty),
 														 returnType: typeof(string),
 														 declaringType: typeof(LinkedSwitch),
 														 defaultBindingMode: BindingMode.TwoWay,
 														 propertyChanged: LinkedPropertyChanged);
 
-		public string LinkedPropertyText
+		public string LinkedProperty
 		{
-			get { return base.GetValue(LinkedProperty).ToString(); }
-			set { base.SetValue(LinkedProperty, value); }
+			get
+			{
+				var actualValue = base.GetValue(LinkedBindableProperty)?.ToString();
+				if (!string.IsNullOrEmpty(actualValue))
+				{
+					this.IsToggled = Settings.GetProperty(actualValue, true);
+				}
+				return base.GetValue(LinkedBindableProperty).ToString();
+			}
+			set
+			{
+				if (!string.IsNullOrEmpty(value))
+				{
+					this.IsToggled = Settings.GetProperty(value, true);
+				}
+				base.SetValue(LinkedBindableProperty, value);
+			}
 		}
 
 		private static void LinkedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -53,28 +68,27 @@ namespace MultiplierLibrary.Model
 		{
 			this.Toggled += LinkedSwitch_Toggled;
 		}
+		public LinkedSwitch(string property)
+		{
+			this.LinkedProperty = property;
+			Settings.SettingChanged += LinkedSwitch_SettingChanged;
+		}
 
 		public void LinkedSwitch_Toggled(object sender, ToggledEventArgs e)
 		{
-			if(string.IsNullOrEmpty(this.LinkedPropertyText))
+			if(string.IsNullOrEmpty(this.LinkedProperty))
 			{
 				Debug.Fail("[ERROR] LinkedSwitch was toggled without a linked setting");
 			}
 			else
 			{
-				Settings.SetProperty(this.LinkedPropertyText, e.Value);
+				Settings.SetProperty(this.LinkedProperty, e.Value);
 			}
-		}
-
-		public LinkedSwitch(string property)
-		{
-			this.LinkedPropertyText = property;
-			Settings.SettingChanged += LinkedSwitch_SettingChanged;
 		}
 
 		public void LinkedSwitch_SettingChanged(object sender, SettingsChangedEventArgs args)
 		{
-			if(args.SettingChanged == this.LinkedPropertyText)
+			if(args.SettingChanged == this.LinkedProperty)
 			{
 				this.IsToggled = (bool)args.NewValue;
 			}

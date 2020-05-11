@@ -40,12 +40,8 @@ namespace MultiplierLibrary.View
 					HorizontalOptions = LayoutOptions.Center
 				};
 
-				Switch Switch = new Switch()
-				{
-					ClassId = type.ToString(),
-					HorizontalOptions = LayoutOptions.Center
-				};
-				Switch.Toggled += Switch_Toggled;
+				LinkedSwitch Switch = new LinkedSwitch(type.ToString());
+				Switch.HorizontalOptions = LayoutOptions.Center;
 
 				grid.Children.Add(label, 0, (int)type+1);
 				grid.Children.Add(Switch, 1, (int)type+1);
@@ -68,17 +64,5 @@ namespace MultiplierLibrary.View
 				Navigator.GoHome();
 			}
 		}
-
-		private void Switch_Toggled(object sender, ToggledEventArgs e)
-		{
-			Switch toggle = (Switch)sender;
-			Settings.SetProperty(toggle.ClassId, toggle.IsToggled);
-		}
-
-		
-
-		
-			//Navigator.GoToProblemsPage();
-		
-
-} }
+	}
+}
