@@ -86,5 +86,10 @@ namespace MultiplierLibrary.Model
 			get => GetProperty("RepeatProblemMinimum", 10);
 			set => SetProperty("RepeatProblemMinimum", value);
 		}
+		public static bool ShouldPlaySound
+		{
+			get => GetProperty("ShouldPlaySound", true);
+			set => SetProperty("ShouldPlaySound", value);
+		}
 	}
 }
