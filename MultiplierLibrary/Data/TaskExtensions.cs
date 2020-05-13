@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace MultiplierLibrary.Data
 {
+    // Honestly I don't know what this is for, but it was included in the tutorial for sqlite databases in xamarin
+    // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/data/databases#code-try-2
     public static class TaskExtensions
     {
         // NOTE: Async void is intentional here. This provides a way

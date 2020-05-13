@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace MultiplierLibrary.Controller
 {
+	// This GameController class handles most of the game logic for the app. As such the code tends to be a bit messy
 	public class GameController
 	{
 		public Problem CurrentProblem;

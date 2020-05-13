@@ -7,6 +7,14 @@ using System.Diagnostics;
 
 namespace MultiplierLibrary.Model
 {
+
+	/** Notes: 
+	 * In order to add new problems to the multiplier class you have to add a corresponding item to the Types enum.
+	 * There needs to be a public static Problem Get{Enum Item Name} where Enum Item Name is the enum name that you used
+	 * There should also be a user friendly name for the enum in the System.Model.Types.TypeConverter.ToString() method
+	 * once those three things are added the settings page will then be able to add a new switch that is linked to the
+	 * app settings with the friendly name given.
+	 */
 	public static class Multiplier
 	{
 		private static readonly Dictionary<int, int[]> Factors = InitFactors();
@@ -14,35 +22,28 @@ namespace MultiplierLibrary.Model
 
 		private static Dictionary<Types, Func<Problem>> InitProblems()
 		{
+			// creates a dictionary of function pointers
 			var dict = new Dictionary<Types, Func<Problem>>();
 
+			// loop through each proplem type in the Types enumeration
 			for (Types t = 0; t < Types.Size; t++)
 			{
+				// check if we're going to use this problem type
 				if(Settings.GetProperty(t.ToString(), true))
 				{
-					dict[t] = GetMethodByName("Get" + t.ToString());
+					// This is why we need a method named Get{Problem type name}
+					var func = GetMethodByName("Get" + t.ToString());
+					if(func != null)
+					{
+						dict[t] = func;
+					}
 				}
 			}
 
+			// Add a settings changed event handler so that we can account for changes to the settings
 			Settings.SettingChanged += Settings_SettingChanged;
 			
 			return dict;
-		}
-
-		private static void Settings_SettingChanged(object sender, SettingsChangedEventArgs args)
-		{
-			Types type = TypeConverter.FromString(args.SettingChanged);
-			if(type != Types.Size)
-			{
-				if((bool)args.NewValue)
-				{
-					Problems[type] = GetMethodByName("Get" + type.ToString());
-				}
-				else if(Problems.ContainsKey(type))
-				{
-					Problems.Remove(type);
-				}
-			}
 		}
 
 		private static Dictionary<int, int[]> InitFactors()
@@ -684,22 +685,47 @@ namespace MultiplierLibrary.Model
 		}
 
 #endregion
-
+		// Returns a public static Multiplier method by the given name.
 		private static Func<Problem> GetMethodByName(string name)
 		{
 			try
 			{
+				// set the filter to only look for public and static methods
 				var flags = (BindingFlags.Public | BindingFlags.Static);
 				Type type = typeof(Multiplier);
+				// Get MethodInfo function pointer for the given method name.
+				// Will return null and throw an exception if the method doesn't exist
 				MethodInfo info = type.GetMethod(name, flags);
-				Func<Problem> problemFunc = (Func<Problem>) Delegate.CreateDelegate(typeof(Func<Problem>), info);
+				// Creates a delegate from the given MethodInfo that can be casted to a Func<Problem>.
+				// I could have used the MethodInfo, but this way it returns a type casted object while the
+				// MethodInfo returns a generic object.
+				Func<Problem> problemFunc = (Func<Problem>)Delegate.CreateDelegate(typeof(Func<Problem>), info);
 				return problemFunc;
-
 			}
-			catch (Exception e)
+			catch
 			{
 				Debug.Fail($"[ERROR] Could not find method '{name}'");
 				return null;
+			}
+		}
+
+		private static void Settings_SettingChanged(object sender, SettingsChangedEventArgs args)
+		{
+			Types type = TypeConverter.FromString(args.SettingChanged);
+			if (type != Types.Size)
+			{
+				if ((bool)args.NewValue)
+				{
+					var func = GetMethodByName("Get" + type.ToString());
+					if (func != null)
+					{
+						Problems[type] = func;
+					}
+				}
+				else if (Problems.ContainsKey(type))
+				{
+					Problems.Remove(type);
+				}
 			}
 		}
 

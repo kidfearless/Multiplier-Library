@@ -7,8 +7,8 @@ using Switch = Xamarin.Forms.Switch;
 
 namespace MultiplierLibrary.Model
 {
-	// Linked switch provides a self contained interface for linking switches to a corresponding setting.
-	// All while propagating the changes to other switches
+	// Linked stepper provides a self contained interface for linking switches to a corresponding setting.
+	// All while propagating the changes to other linked type controls
 	class LinkedStepper : Stepper
 	{
 		public new int Increment

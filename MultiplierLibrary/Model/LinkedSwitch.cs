@@ -8,7 +8,7 @@ using Switch = Xamarin.Forms.Switch;
 namespace MultiplierLibrary.Model
 {
 	// Linked switch provides a self contained interface for linking switches to a corresponding setting.
-	// All while propagating the changes to other switches
+	// All while propagating the changes to other linked type controls
 	class LinkedSwitch : Switch
 	{
 		public static readonly BindableProperty LinkedBindableProperty = BindableProperty.Create(

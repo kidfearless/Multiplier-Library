@@ -14,10 +14,8 @@ namespace MultiplierLibrary
 {
 	public partial class App : Application
 	{
-
 		public new static App Current;
 
-		
 		public GameController Game;
 		public App()
 		{
@@ -26,28 +24,19 @@ namespace MultiplierLibrary
 			Settings.OldProblemsPercentage = 0.25;
 			InitializeComponent();
 			this.Game = new GameController();
-			var page = new HomePage();
-			MainPage = page;
-			Multiplier.GetRandomProblem();
+			MainPage = new HomePage();
 		}
 
 		protected override void OnStart()
 		{
-			//Results.Answers = App.Database.GetProblemsAsync().Result;
-
 			Debug.WriteLine("Got problems");
 		}
+
 		protected override void OnSleep()
 		{
-			//var result = from problem in Results.Answers
-			//			 where problem.ID == 0
-			//			 select problem;
-
-			//App.Database.SaveAllProblemsAsync(result);
-
-
 			Debug.WriteLine("Saved problems");
 		}
+
 		protected override void OnResume()
 		{
 		}

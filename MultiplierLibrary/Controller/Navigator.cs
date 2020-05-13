@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace MultiplierLibrary.Controller
 {
+	// Used to navigate between pages, They are instantiated on the first reference to the pages and kept in memory
 	static class Navigator
 	{
 		public static ProblemsPage ProblemsPage = new ProblemsPage();

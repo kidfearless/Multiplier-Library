@@ -9,6 +9,13 @@ namespace MultiplierLibrary.Model
 		public string SettingChanged { get; set; }
 		public object NewValue;
 	}
+
+	/** Wrapper for the App.Current.Properties dictionary.
+	 * Provides generic Get/Set Property methods that check the keys,
+	 * fires a SettingChanged event for the SetProperty
+	 * and creates a value if it doesn't exist in the GetProperty
+	 * 
+	 */
 	public static class Settings
 	{
 		// ensures no null values get returned causing an exception
@@ -63,6 +70,7 @@ namespace MultiplierLibrary.Model
 			App.Current.Properties[setting] = value;
 			return value;
 		}
+
 		// Percentage of old problems to give to the player
 		public static double OldProblemsPercentage
 		{
@@ -83,6 +91,8 @@ namespace MultiplierLibrary.Model
 			get => GetProperty(nameof(RepeatProblemMinimum), 10);
 			set => SetProperty(nameof(RepeatProblemMinimum), value);
 		}
+
+		// setting for the whether or not the app will play sounds if a player gets problems right/wrong
 		public static bool ShouldPlaySound
 		{
 			get => GetProperty(nameof(ShouldPlaySound), true);

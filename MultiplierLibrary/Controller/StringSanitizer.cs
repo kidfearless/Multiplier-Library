@@ -5,6 +5,8 @@ using System.Text;
 namespace MultiplierLibrary.Controller
 {
 	// Gotta love how I have to put this in a class in order to make a simple function
+	// The orm database library parameterizes the strings so it's not nessecary to use this.
+	// But there's no harm in keeping it
 	public static class StringSanitizer
 	{
 		public static string Sanitize(string value)

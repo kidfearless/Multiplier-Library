@@ -60,6 +60,7 @@ namespace MultiplierLibrary.Model
 		Size
 	}
 
+	// Update this if you change the Types enum
 	public static class TypeConverter
 	{
 		public static string ToString(Types type)
