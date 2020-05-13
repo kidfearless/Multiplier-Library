@@ -269,16 +269,26 @@ namespace MultiplierLibrary.Controller
 
 				if(list?.Count > 0)
 				{
-					var item = list[0];
-					CurrentProblem = new Problem
+					int index = 0;
+					// do a bounds check and see if the setting for that problem type is enabled.
+					// if it's not then increment the index.
+					while(index < list.Count && !Settings.GetProperty(list[index].Type.ToString(), true))
 					{
-						ID = 0,
-						LeftHand = item.LeftHand,
-						RightHand = item.RightHand,
-						UserID  = item.UserID,
-						Type = item.Type
-					};
-					return;
+						index++;
+					}
+					if(index < list.Count)
+					{
+						var item = list[index];
+						CurrentProblem = new Problem
+						{
+							ID = 0,
+							LeftHand = item.LeftHand,
+							RightHand = item.RightHand,
+							UserID  = item.UserID,
+							Type = item.Type
+						};
+						return;
+					}
 				}
 			}
 

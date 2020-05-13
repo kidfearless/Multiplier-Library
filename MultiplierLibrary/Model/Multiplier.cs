@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace MultiplierLibrary.Model
 {
-
 	/** Notes: 
 	 * In order to add new problems to the multiplier class you have to add a corresponding item to the Types enum.
 	 * There needs to be a public static Problem Get{Enum Item Name} where Enum Item Name is the enum name that you used

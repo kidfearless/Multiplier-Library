@@ -12,7 +12,6 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProblemsPage : ContentPage
 	{
-		
 		public ProblemsPage()
 		{
 			InitializeComponent();
