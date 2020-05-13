@@ -136,7 +136,7 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"CreateNewProblem:");
 
-			this.CurrentProblem = Multiplier.DoWarmup();
+			this.CurrentProblem = Multiplier.GetRandomProblem();
 			this.CurrentProblem.UserID = this.userID;
 			if(new Random().NextDouble() < 0.5)
 			{
