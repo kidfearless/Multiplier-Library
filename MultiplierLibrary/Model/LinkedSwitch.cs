@@ -22,20 +22,11 @@ namespace MultiplierLibrary.Model
 		{
 			get
 			{
-				var actualValue = base.GetValue(LinkedBindableProperty)?.ToString();
-				if (!string.IsNullOrEmpty(actualValue))
-				{
-					this.IsToggled = Settings.GetProperty(actualValue, true);
-				}
-				return base.GetValue(LinkedBindableProperty).ToString();
+				return GetValue(LinkedBindableProperty).ToString();
 			}
 			set
 			{
-				if (!string.IsNullOrEmpty(value))
-				{
-					this.IsToggled = Settings.GetProperty(value, true);
-				}
-				base.SetValue(LinkedBindableProperty, value);
+				SetValue(LinkedBindableProperty, value);
 			}
 		}
 
@@ -44,18 +35,14 @@ namespace MultiplierLibrary.Model
 			try
 			{
 				LinkedSwitch linked = bindable as LinkedSwitch;
-				if(oldValue == null && newValue != null)
-				{
-					Settings.SettingChanged += linked.LinkedSwitch_SettingChanged;
-				}
-				else if (newValue == null && oldValue != null)
-				{
-					Settings.SettingChanged -= linked.LinkedSwitch_SettingChanged;
-				}
 
 				if(newValue != null)
 				{
-					linked.IsToggled = Settings.GetProperty((string)newValue, true);
+					bool prop = Settings.GetProperty((string)newValue, true);
+					if (linked.IsToggled != prop)
+					{
+						linked.IsToggled = prop;
+					}
 				}
 			}
 			catch (Exception e)
@@ -64,23 +51,23 @@ namespace MultiplierLibrary.Model
 			}
 		}
 
-		public LinkedSwitch()
-		{
-			this.Toggled += LinkedSwitch_Toggled;
-		}
 		public LinkedSwitch(string property)
 		{
 			this.LinkedProperty = property;
 			Settings.SettingChanged += LinkedSwitch_SettingChanged;
+			this.Toggled += LinkedSwitch_Toggled;
 			this.IsToggled = Settings.GetProperty(property, true);
 		}
 		public LinkedSwitch(string property, bool DefaultValue)
 		{
 			this.LinkedProperty = property;
 			Settings.SettingChanged += LinkedSwitch_SettingChanged;
+			this.Toggled += LinkedSwitch_Toggled;
 			this.IsToggled = Settings.GetProperty(property, DefaultValue);
 		}
 
+		// This currently fires an extra time for each time you switch pages.
+		// Please fix later
 		public void LinkedSwitch_Toggled(object sender, ToggledEventArgs e)
 		{
 			if(string.IsNullOrEmpty(this.LinkedProperty))
@@ -95,7 +82,7 @@ namespace MultiplierLibrary.Model
 
 		public void LinkedSwitch_SettingChanged(object sender, SettingsChangedEventArgs args)
 		{
-			if(args.SettingChanged == this.LinkedProperty)
+			if(args.SettingChanged == this.LinkedProperty && this.IsToggled != (bool)args.NewValue)
 			{
 				this.IsToggled = (bool)args.NewValue;
 			}

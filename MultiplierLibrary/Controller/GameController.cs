@@ -34,13 +34,18 @@ namespace MultiplierLibrary.Controller
 	public class GameController
 	{
 		public Problem CurrentProblem;
-		
+
+		#region Classes and Pointers
+		AudioPlayer player;
 		public ProblemsPage Page;
 		List<Problem> RoundProblems;
 		Dictionary<Types, List<Problem>> History;
 		List<Problem> Session;
 		Multiplier Multiplier;
 		RecordsDatabase Database;
+		#endregion
+
+
 		#region Primitives
 		int _correct;
 		int Correct
@@ -92,6 +97,7 @@ namespace MultiplierLibrary.Controller
 
 			Multiplier = new Multiplier();
 			RoundProblems = new List<Problem>();
+			player = new AudioPlayer();
 		}
 
 		public async void StartNewGame()
@@ -160,8 +166,12 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"OnRoundEnd:");
 			
-
 			Database.SaveRound(this.Session);
+
+			if(Settings.ShouldPlaySound)
+			{
+				player.PlayCongrats();
+			}
 
 			Page.OnRoundEnd();
 		}
@@ -183,6 +193,10 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"OnAnsweredWrong:");
 			this.Wrong++;
+			if (Settings.ShouldPlaySound)
+			{
+				player.PlayWrong();
+			}
 			Page.OnWrong();
 		}
 
@@ -191,7 +205,67 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"OnAnsweredCorrectly:");
 			this.Correct++;
 			this.CurrentProblem.Correct = 1;
+			if (Settings.ShouldPlaySound)
+			{
+				player.PlayCorrect();
+			}
 			Page.OnCorrect();
+		}
+
+		public void OnResultsPage()
+		{
+			Dictionary<Types, Stats> stats = new Dictionary<Types, Stats>();
+
+			int i = 0;
+			foreach (var problem in Session)
+			{
+				i++;
+				if (!stats.ContainsKey(problem.Type))
+				{
+					stats[problem.Type] = new Stats();
+				}
+
+				stats[problem.Type].Wins += problem.Correct;
+				stats[problem.Type].Total++;
+				var label = new Label
+				{
+					Text = $"Problem {i}: {problem.LeftHand} X {problem.LeftHand}",
+					TextColor = problem.Correct == 1 ? Color.Green : Color.Red,
+					HorizontalTextAlignment = TextAlignment.Center
+				};
+				var stackLayout = Navigator.RoundResultsPage.ProblemStack;
+				stackLayout.Children.Add(label);
+			}
+			var results = Navigator.RoundResultsPage;
+			results.LabelCorrect.Text = Correct.ToString();
+			results.LabelWrong.Text = Wrong.ToString();
+			results.LabelTotal.Text = TotalProblems.ToString();
+	
+			
+			foreach (var stat in stats)
+			{
+				var type = Model.TypeConverter.ToString(stat.Key);
+				type = type.PadRight(30 - type.Length);
+
+				Button button = new Button
+				{
+					Text =  $"Type: {type}\t\t\tWins: {stat.Value.Wins} " +
+							$"Loss: {stat.Value.Losses} AVG: {stat.Value.AVG}",
+				};
+				button.Clicked += delegate (object sender, EventArgs e)
+				{
+					TypeButton_Clicked(sender, e, stat.Key);
+				};
+
+				Navigator.RoundResultsPage.ProblemStack.Children.Insert(0, button);
+			}
+
+
+		}
+
+		private void TypeButton_Clicked(object sender, EventArgs e, Types type)
+		{
+			
 		}
 
 		public async void OnAnsweredPost(Problem oldProblem)
