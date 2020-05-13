@@ -112,55 +112,202 @@ namespace MultiplierLibrary.Model
 			int index = random.Next(0, array.Length/2);
 			problem.LeftHand = array[index];
 			problem.RightHand = array[array.Length - index];
+			//problem.LeftHandSquare = array[index];
 			problem.Type = Types.Factored;
 
 			return problem;
 		}
+		
+		//Eighties
+		public Problem GetEighties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(80, 90),
+				RightHand = random.Next(10, 90),
+				Type = Types.Eighties
+
+			};
+
+			return problem;
+		}
+
+		//Twenties
+		public Problem GetTwenties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(20, 30),
+				RightHand = random.Next(20, 30),
+				Type = Types.Twenties
+
+			};
+
+			return problem;
+		}
+
+		//Thirties
+		public Problem GetThirties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(30, 40),
+				RightHand = random.Next(30, 40),
+				Type = Types.Thirties
+
+			};
+
+			return problem;
+		}
+
+		//Forties
+		public Problem GetForties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(40, 50),
+				RightHand = random.Next(40, 50),
+				Type = Types.Forties
+
+			};
+
+			return problem;
+		}
+
+		//Fifties
+		public Problem GetFifties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(50, 60),
+				RightHand = random.Next(50, 60),
+				Type = Types.Fifties
+
+			};
+
+			return problem;
+		}
+
+		//Sixties
+		public Problem GetSixties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(60, 70),
+				RightHand = random.Next(60, 70),
+				Type = Types.Sixties
+
+			};
+
+			return problem;
+		}
+
+		//Seventies
+		public Problem GetSeventies()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(70, 80),
+				RightHand = random.Next(70, 80),
+				Type = Types.Seventies
+
+			};
+
+			return problem;
+		}
+
+
 		//EightyTo100
-		public Problem DoEightyTo100()
+		public Problem GetEightyTo100()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(80, 100),
-				RightHand = random.Next(10, 100),
-				Type = Types.EightyTo100Squared
+				RightHand = random.Next(1, 100),
+				Type = Types.EightyTo100
 
 			};
 
 			return problem;
 		}
+
+		//Nineties 
+		public Problem GetNineties()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(90, 100),
+				RightHand = random.Next(90, 100),
+				Type = Types.Nineties
+
+			};
+
+			return problem;
+		}
+
 		//FourtyToSixty
-		public Problem DoFourtyToSixty()
+		public Problem GetFourtyToSixty()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(40, 60),
-				RightHand = random.Next(10, 100),
+				RightHand = random.Next(40, 60),
 				Type = Types.FourtiesToSixties
 			};
 
 			return problem;
 		}
 		//teens
-		public Problem DoTeens()
+		public Problem GetTeens()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(10, 20),
-				RightHand = random.Next(10, 100),
+				RightHand = random.Next(10, 20),
 				Type = Types.Teens
 			};
 
 			return problem;
 		}
-		// 2 digits
-		public Problem Do3By1()
+		//teens
+		public Problem GetTeensEx()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(10, 20),
+				RightHand = random.Next(1, 1000),
+				Type = Types.TeensEx
+			};
+
+			return problem;
+		}
+
+		// Warm Up // basic problems
+		public Problem Get3By1()
 		{
 			Random random = new Random();
 
@@ -174,7 +321,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem Do2By1()
+		public Problem Get2By1()
 		{
 			Random random = new Random();
 
@@ -188,7 +335,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem Do1By1()
+		public Problem Get1By1()
 		{
 			Random random = new Random();
 
@@ -202,18 +349,348 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem DoWarmup()
+		public Problem GetWarmUp()
 		{
 			Random random = new Random();
-			switch(random.Next(1, 8))
+			switch (random.Next(1, 4))
 			{
-				case 1: return Do1By1();
-				case 2: return Do2By1();
-				case 3: return Do3By1();
-				case 5: return DoTeens();
-				case 6: return DoFourtyToSixty();
-				case 7: return DoEightyTo100();
-				default: return Do1By1();
+				case 1: return Get1By1();
+				case 2: return Get2By1();
+				case 3: return Get3By1();				
+				default: return Get1By1();
+			}
+		}
+
+		// Square Problems
+		public Problem Get1By1Square()
+		{
+			Random random = new Random();
+			
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(1, 10),
+				
+				Type = Types.SinglesSquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetTeenSquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(10, 20),
+
+				Type = Types.TeensSquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetFortytoSixtySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(40, 60),
+
+				Type = Types.FourtyToSixtySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetEightytoHundredSquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(80, 100),
+
+				Type = Types.EightyTo100Squared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetBeyondSquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(100, 1000),
+
+				Type = Types.AllTheRestSquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetTwentySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(20, 30),
+
+				Type = Types.TwentySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetThirtySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(30, 40),
+
+				Type = Types.ThirtySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetFortySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(40, 50),
+
+				Type = Types.FortySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetFiftySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(50, 60),
+
+				Type = Types.FiftySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetSixtySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(60, 70),
+
+				Type = Types.SixtySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetSeventySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(70, 80),
+
+				Type = Types.SeventySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetEightySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(80, 90),
+
+				Type = Types.EightySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+
+		public Problem GetNinetySquare()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(90, 100),
+
+				Type = Types.NinetySquared
+			};
+			problem.RightHand = problem.LeftHand;
+
+			return problem;
+		}
+		// Even Numbers
+		public Problem GetEven()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = (2 * random.Next(2 / 2, 100 / 2)),
+				RightHand = (2 * random.Next(2 / 2, 100 / 2)),
+
+				Type = Types.Even
+			};			
+
+			return problem;
+		}
+
+		//Odd
+		public Problem GetOdd()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = (2 * random.Next(0 / 2, 100 / 2))+1,
+				RightHand = (2 * random.Next(0 / 2, 98 / 2))+1,
+
+				Type = Types.Odd
+			};
+
+			return problem;
+		}
+
+		// Odd & Even
+		public Problem GetOddAndEven()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = (2 * random.Next(2 / 2, 98 / 2)),
+				RightHand = (2 * random.Next(0 / 2, 98 / 2)) + 1,
+
+				Type = Types.OddAndEven
+			};
+
+			return problem;
+		}
+
+		// Number ending in Even and 5 
+		public Problem Get5AndEven()
+		{
+			Random random = new Random();
+			string fiveString = "5";
+
+			Problem problem = new Problem
+			{
+				LeftHand = (2 * random.Next(2 / 2, 98 / 2)),
+				RightHand = random.Next(1,10),
+
+				Type = Types.FiveByEven
+			};
+
+			string numString = problem.RightHand.ToString();
+			string comString = numString + fiveString;
+			problem.RightHand = Convert.ToInt32(comString);
+
+			return problem;
+		}
+
+		// SingleSumtoTen
+
+		public Problem GetSingleSumtoTen()
+		{
+			Random random = new Random();
+
+			Problem problem = new Problem
+			{
+				LeftHand = random.Next(1, 100),
+				RightHand = random.Next(1, 10),
+				Type = Types.SinglesSumToTen
+			};
+			int rightNum2 = problem.LeftHand % 10;
+			while (problem.LeftHand % 10 == 0)
+			{
+				problem.LeftHand = random.Next(1, 100);
+
+			}
+			
+			int rightNum2Sol = 10 - rightNum2;
+			string rightString = problem.RightHand.ToString();
+			string rightString2 = rightNum2Sol.ToString();
+			string RightHandString = rightString + rightString2;
+			problem.RightHand = Convert.ToInt32(RightHandString);
+			
+			return problem;
+		}
+
+
+		// Random
+
+		public Problem GetRandomProblem()
+		{
+			Random random = new Random();
+			switch(random.Next(1, 31))
+			{
+				case 1: return Get1By1();
+				case 2: return Get2By1();
+				case 3: return Get3By1();
+				case 5: return GetTeens();
+				case 6: return GetFourtyToSixty();
+				case 7: return GetEightyTo100();
+				case 8: return GetEighties();
+				case 9: return GetNineties();
+				case 10: return Get1By1Square();
+				case 11: return GetTeenSquare();
+				case 12: return GetFortytoSixtySquare();
+				case 13: return GetEightytoHundredSquare();
+				case 14: return GetBeyondSquare();
+				case 15: return GetOdd();
+				case 16: return GetEven();
+				case 17: return GetOddAndEven();
+				case 18: return Get5AndEven();
+				case 19: return GetForties();
+				case 20: return GetThirties();
+				case 21: return GetTwenties();
+				case 22: return GetFifties();
+				case 23: return GetSixties();
+				case 24: return GetSeventies();
+				case 25: return GetTwentySquare();
+				case 26: return GetThirtySquare();
+				case 27: return GetFortySquare();
+				case 28: return GetFiftySquare();
+				case 29: return GetSixtySquare();
+				case 30: return GetSeventySquare();
+				default: return Get1By1();
 			}
 		}
 
