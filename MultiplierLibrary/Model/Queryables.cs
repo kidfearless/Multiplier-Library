@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
+// This contains all the classes needed in order to query the database in an orm model library
 namespace MultiplierLibrary.Model
 {
 	//SELECT AVG(Correct) AS 'AVG_CORRECT', `Left`, `Right`

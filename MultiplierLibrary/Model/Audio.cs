@@ -9,6 +9,11 @@ using Xamarin.Forms.Internals;
 
 namespace MultiplierLibrary.Model
 {
+	/** AudioPlayer wraps up the ISimpleAudioPlayer class into a single object.
+	 *	The reason for this is to wrap functionality into a single class.
+	 *	As well as loading the files asynchronously to reduce cpu load on low end devices. 
+	 * 
+	 */
 	class AudioPlayer
 	{
 		ISimpleAudioPlayer congratsPlayer;

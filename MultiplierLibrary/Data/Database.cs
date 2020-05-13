@@ -14,8 +14,9 @@ using System.Linq;
 
 namespace MultiplierLibrary.Data
 {
-	[Preserve]
 	//  By applying this attribute all of the members of the target will be kept as if they had been referenced by the code. 
+	[Preserve]
+	// 
 	class RecordsDatabase
 	{
 		static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>

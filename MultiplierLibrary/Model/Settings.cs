@@ -14,8 +14,7 @@ namespace MultiplierLibrary.Model
 	 * Provides generic Get/Set Property methods that check the keys,
 	 * fires a SettingChanged event for the SetProperty
 	 * and creates a value if it doesn't exist in the GetProperty
-	 * 
-	 */
+	 * */
 	public static class Settings
 	{
 		// ensures no null values get returned causing an exception
