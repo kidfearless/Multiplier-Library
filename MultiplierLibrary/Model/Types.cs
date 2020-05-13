@@ -28,7 +28,7 @@ namespace MultiplierLibrary.Model
 		EightySquared,
 		NinetySquared,
 		// factors
-		//Factored,
+		Factored,
 		// friendlies
 		//Friendly,
 		// 2x2
@@ -43,7 +43,7 @@ namespace MultiplierLibrary.Model
 		Sixties,
 		Seventies,
 		// either both numbers are even, or both number are odd
-		DifferenceOfSquares,
+		//DifferenceOfSquares,
 		Even,
 		Odd,
 		OddAndEven,

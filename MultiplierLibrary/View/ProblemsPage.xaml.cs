@@ -142,20 +142,5 @@ namespace MultiplierLibrary.View
 			Labelequal.IsVisible = true;
 			LabelAnswer.IsVisible = true;
 		}
-
-		public void testButtonClicked(object sender, EventArgs args)
-		{
-			if(Settings.ShouldPlaySound == true)
-			{
-				Settings.ShouldPlaySound = false;
-				testButton.BackgroundColor = Color.Gray;
-			}
-			else
-			{
-				Settings.ShouldPlaySound = true;
-				testButton.BackgroundColor = Color.White;
-			}
-			
-		}
 	}
 }
