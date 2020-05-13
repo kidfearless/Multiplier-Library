@@ -14,9 +14,6 @@ namespace MultiplierLibrary.Model
 		// ensures no null values get returned causing an exception
 
 		public static IDictionary<string, object> Properties { get => App.Current.Properties; }
-
-		
-
 		public static event EventHandler<SettingsChangedEventArgs> SettingChanged;
 
 		public static bool GetProperty(string value, bool defaultValue)
@@ -69,27 +66,27 @@ namespace MultiplierLibrary.Model
 		// Percentage of old problems to give to the player
 		public static double OldProblemsPercentage
 		{
-			get => GetProperty("OldProblemsPercentage", 0.25);
-			set => SetProperty("OldProblemsPercentage", value);
+			get => GetProperty(nameof(OldProblemsPercentage), 0.25);
+			set => SetProperty(nameof(OldProblemsPercentage), value);
 		}
 
 		// The average score on a problem to before it's no longer shown as an old problem
 		public static double RepeatProblemDropOff
 		{
-			get => GetProperty("OldProblemsPercentage", 0.9);
-			set => SetProperty("OldProblemsPercentage", value);
+			get => GetProperty(nameof(RepeatProblemDropOff), 0.9);
+			set => SetProperty(nameof(RepeatProblemDropOff), value);
 		}
 
 		// The minimum number of times the problem must be answered before we check RepeatProblemDropOff
 		public static int RepeatProblemMinimum
 		{
-			get => GetProperty("RepeatProblemMinimum", 10);
-			set => SetProperty("RepeatProblemMinimum", value);
+			get => GetProperty(nameof(RepeatProblemMinimum), 10);
+			set => SetProperty(nameof(RepeatProblemMinimum), value);
 		}
 		public static bool ShouldPlaySound
 		{
-			get => GetProperty("ShouldPlaySound", true);
-			set => SetProperty("ShouldPlaySound", value);
+			get => GetProperty(nameof(ShouldPlaySound), true);
+			set => SetProperty(nameof(ShouldPlaySound), value);
 		}
 	}
 }

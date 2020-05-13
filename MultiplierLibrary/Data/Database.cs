@@ -82,7 +82,7 @@ namespace MultiplierLibrary.Data
 			return history;
 		}
 
-		internal async void SaveRound(List<Problem> session)
+		internal void SaveRound(List<Problem> session)
 		{
 			string query =
 			@"INSERT INTO records (LeftHand, RightHand, Correct, Type, UserID) VALUES ";
@@ -91,7 +91,7 @@ namespace MultiplierLibrary.Data
 				query += problem.ToQueryString() + ", ";
 			}
 			query = query.Substring(0, query.Length - 2);
-			await Database.ExecuteAsync(query);
+			Database.ExecuteAsync(query);
 		}
 
 		public async Task<List<UserStats>> GetWorstProblems(int userID)

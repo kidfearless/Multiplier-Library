@@ -8,20 +8,21 @@ namespace MultiplierLibrary.Controller
 {
 	static class Navigator
 	{
-
+		public static ProblemsPage ProblemsPage = new ProblemsPage();
+		public static HomePage HomePage = new HomePage();
+		public static RoundResults RoundResultsPage = new RoundResults();
+		public static SettingsPage SettingsPage = new SettingsPage();
 		public static void StartGame(string userName)
 		{
-			ProblemsPage page = new ProblemsPage();
-			App.Current.MainPage = page;
-			App.Current.Game.Page = page;
+			App.Current.MainPage = ProblemsPage;
+			App.Current.Game.Page = ProblemsPage;
 			App.Current.Game.StartNewGame(userName);
 		}
 
 		public static void StartGame()
 		{
-			ProblemsPage page = new ProblemsPage();
-			App.Current.MainPage = page;
-			App.Current.Game.Page = page;
+			App.Current.MainPage = ProblemsPage;
+			App.Current.Game.Page = ProblemsPage;
 			App.Current.Game.StartNewGame();
 		}
 
@@ -32,21 +33,18 @@ namespace MultiplierLibrary.Controller
 
 		public static void GoHome()
 		{
-			HomePage page = new HomePage();
-			App.Current.MainPage = page;
-			App.Current.Game.Page = null;
+			App.Current.MainPage = HomePage;
 		}
 
 		public static void CheckResults()
 		{
-			RoundResults page = new RoundResults();
-			App.Current.MainPage = page;
+			App.Current.Game.OnResultsPage();
+			App.Current.MainPage = RoundResultsPage;
 		}
 
 		public static void GoToSettings()
 		{
-			SettingsPage page = new SettingsPage();
-			App.Current.MainPage = page;
+			App.Current.MainPage = SettingsPage;
 		}
 	}
 }
