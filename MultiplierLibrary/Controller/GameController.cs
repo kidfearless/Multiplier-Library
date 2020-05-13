@@ -12,23 +12,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 
-// TODO: Pulling problems that were answered poorly from the database to give to the player when they answer a question
-
-// game starts when page switches to problemspage
-// query all the problems in the table where the userid==username.id
-// sets the GameController.History for each type in the return results
-
-// # some record of the previous results on this problem
-// #(probably a number of times it was worked together with a percentage of times it was correct)
-// select Count(*), Average(Correct) from results where Left = ? and Right = ? And ID = ?
-
-// #When a user starts a new round, the app can go through the dictionary pretty quickly
-// #and extract all of the previous problems that fit into the current options.
-// That mixed with 
-// #The rest of the time (80%) pick a random problem if it hasn't been solved before.
-// Tells me that I should query their results at the start and give them a random(for now) problem from their history
-// and then a generated problem the rest of the time.
-
 namespace MultiplierLibrary.Controller
 {
 	public class GameController
@@ -142,7 +125,7 @@ namespace MultiplierLibrary.Controller
 		{
 			Debug.WriteLine($"CreateNewProblem:");
 
-			this.CurrentProblem = Multiplier.DoWarmup();
+			this.CurrentProblem = Multiplier.GetWarmUp();
 			this.CurrentProblem.UserID = this.userID;
 			if(new Random().NextDouble() < 0.5)
 			{
