@@ -28,6 +28,7 @@ namespace MultiplierLibrary
 			this.Game = new GameController();
 			var page = new HomePage();
 			MainPage = page;
+			Multiplier.GetRandomProblem();
 		}
 
 		protected override void OnStart()

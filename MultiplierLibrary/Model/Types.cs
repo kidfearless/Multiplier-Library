@@ -14,7 +14,6 @@ namespace MultiplierLibrary.Model
 		// 2x2
 		EightyTo100,
 		// squares
-		AnySquare,
 		SinglesSquared,
 		TeensSquared,
 		FourtyToSixtySquared,
@@ -88,6 +87,19 @@ namespace MultiplierLibrary.Model
 				case 18: return "Primes";
 				case 19: return "Size";
 				default: return "One By One";
+			}
+		}
+
+		public static Types FromString(string value)
+		{
+			try
+			{
+				return (Types)Enum.Parse(typeof(Types), value);
+
+			}
+			catch
+			{
+				return Types.Size;
 			}
 		}
 	}

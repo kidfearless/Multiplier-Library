@@ -2,20 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace MultiplierLibrary.Model
 {
-	public class Multiplier
+	public static class Multiplier
 	{
 		private static readonly Dictionary<int, int[]> Factors = InitFactors();
+		private static Dictionary<Types, Func<Problem>> Problems = InitProblems();
 
-		//public delegate void ProblemAddedCallback(Multiplier multiplier, Problem problem);
-		//public delegate void GameStartedCallback(Multiplier multiplier);
-		//public delegate void GameEndedCallback(Multiplier multiplier);
-
-
-		public Multiplier()
+		private static Dictionary<Types, Func<Problem>> InitProblems()
 		{
+			var dict = new Dictionary<Types, Func<Problem>>();
+
+			for (Types t = 0; t < Types.Size; t++)
+			{
+				if(Settings.GetProperty(t.ToString(), true))
+				{
+					dict[t] = GetMethodByName("Get" + t.ToString());
+				}
+			}
+
+			Settings.SettingChanged += Settings_SettingChanged;
+			
+			return dict;
+		}
+
+		private static void Settings_SettingChanged(object sender, SettingsChangedEventArgs args)
+		{
+			Types type = TypeConverter.FromString(args.SettingChanged);
+			if(type != Types.Size)
+			{
+				if((bool)args.NewValue)
+				{
+					Problems[type] = GetMethodByName("Get" + type.ToString());
+				}
+				else if(Problems.ContainsKey(type))
+				{
+					Problems.Remove(type);
+				}
+			}
 		}
 
 		private static Dictionary<int, int[]> InitFactors()
@@ -100,7 +127,8 @@ namespace MultiplierLibrary.Model
 			return temp;
 		}
 
-		public Problem GetRandomFactor()
+		#region Problem Getters
+		public static Problem GetFactored()
 		{
 			Problem problem = new Problem();
 
@@ -119,7 +147,7 @@ namespace MultiplierLibrary.Model
 		}
 		
 		//Eighties
-		public Problem GetEighties()
+		public static Problem GetEighties()
 		{
 			Random random = new Random();
 
@@ -135,7 +163,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Twenties
-		public Problem GetTwenties()
+		public static Problem GetTwenties()
 		{
 			Random random = new Random();
 
@@ -151,7 +179,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Thirties
-		public Problem GetThirties()
+		public static Problem GetThirties()
 		{
 			Random random = new Random();
 
@@ -167,7 +195,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Forties
-		public Problem GetForties()
+		public static Problem GetForties()
 		{
 			Random random = new Random();
 
@@ -183,7 +211,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Fifties
-		public Problem GetFifties()
+		public static Problem GetFifties()
 		{
 			Random random = new Random();
 
@@ -199,7 +227,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Sixties
-		public Problem GetSixties()
+		public static Problem GetSixties()
 		{
 			Random random = new Random();
 
@@ -215,7 +243,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Seventies
-		public Problem GetSeventies()
+		public static Problem GetSeventies()
 		{
 			Random random = new Random();
 
@@ -232,7 +260,7 @@ namespace MultiplierLibrary.Model
 
 
 		//EightyTo100
-		public Problem GetEightyTo100()
+		public static Problem GetEightyTo100()
 		{
 			Random random = new Random();
 
@@ -248,7 +276,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Nineties 
-		public Problem GetNineties()
+		public static Problem GetNineties()
 		{
 			Random random = new Random();
 
@@ -264,7 +292,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//FourtyToSixty
-		public Problem GetFourtyToSixty()
+		public static Problem GetFourtiesToSixties()
 		{
 			Random random = new Random();
 
@@ -278,7 +306,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 		//teens
-		public Problem GetTeens()
+		public static Problem GetTeens()
 		{
 			Random random = new Random();
 
@@ -292,7 +320,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 		//teens
-		public Problem GetTeensEx()
+		public static Problem GetTeensEx()
 		{
 			Random random = new Random();
 
@@ -307,7 +335,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		// Warm Up // basic problems
-		public Problem Get3By1()
+		public static Problem GetThreeByOne()
 		{
 			Random random = new Random();
 
@@ -321,7 +349,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem Get2By1()
+		public static Problem GetTwoByOne()
 		{
 			Random random = new Random();
 
@@ -335,7 +363,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem Get1By1()
+		public static Problem GetOneByOne()
 		{
 			Random random = new Random();
 
@@ -349,27 +377,26 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetWarmUp()
+		public static Problem GetWarmUp()
 		{
 			Random random = new Random();
 			switch (random.Next(1, 4))
 			{
-				case 1: return Get1By1();
-				case 2: return Get2By1();
-				case 3: return Get3By1();				
-				default: return Get1By1();
+				case 1: return GetOneByOne();
+				case 2: return GetTwoByOne();
+				case 3: return GetThreeByOne();				
+				default: return GetOneByOne();
 			}
 		}
 
 		// Square Problems
-		public Problem Get1By1Square()
+		public static Problem GetSinglesSquared()
 		{
 			Random random = new Random();
 			
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(1, 10),
-				
 				Type = Types.SinglesSquared
 			};
 			problem.RightHand = problem.LeftHand;
@@ -377,14 +404,13 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetTeenSquare()
+		public static Problem GetTeensSquared()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(10, 20),
-
 				Type = Types.TeensSquared
 			};
 			problem.RightHand = problem.LeftHand;
@@ -392,14 +418,13 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetFortytoSixtySquare()
+		public static Problem GetFourtyToSixtySquared()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(40, 60),
-
 				Type = Types.FourtyToSixtySquared
 			};
 			problem.RightHand = problem.LeftHand;
@@ -407,14 +432,13 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetEightytoHundredSquare()
+		public static Problem GetEightyTo100Squared()
 		{
 			Random random = new Random();
 
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(80, 100),
-
 				Type = Types.EightyTo100Squared
 			};
 			problem.RightHand = problem.LeftHand;
@@ -422,7 +446,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetBeyondSquare()
+		public static Problem GetAllTheRestSquared()
 		{
 			Random random = new Random();
 
@@ -437,7 +461,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetTwentySquare()
+		public static Problem GetTwentySquared()
 		{
 			Random random = new Random();
 
@@ -452,7 +476,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetThirtySquare()
+		public static Problem GetThirtySquared()
 		{
 			Random random = new Random();
 
@@ -467,7 +491,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetFortySquare()
+		public static Problem GetFortySquared()
 		{
 			Random random = new Random();
 
@@ -482,7 +506,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetFiftySquare()
+		public static Problem GetFiftySquared()
 		{
 			Random random = new Random();
 
@@ -497,7 +521,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetSixtySquare()
+		public static Problem GetSixtySquared()
 		{
 			Random random = new Random();
 
@@ -512,7 +536,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetSeventySquare()
+		public static Problem GetSeventySquared()
 		{
 			Random random = new Random();
 
@@ -527,7 +551,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetEightySquare()
+		public static Problem GetEightySquared()
 		{
 			Random random = new Random();
 
@@ -542,7 +566,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-		public Problem GetNinetySquare()
+		public static Problem GetNinetySquared()
 		{
 			Random random = new Random();
 
@@ -557,7 +581,7 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 		// Even Numbers
-		public Problem GetEven()
+		public static Problem GetEven()
 		{
 			Random random = new Random();
 
@@ -573,7 +597,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		//Odd
-		public Problem GetOdd()
+		public static Problem GetOdd()
 		{
 			Random random = new Random();
 
@@ -589,7 +613,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		// Odd & Even
-		public Problem GetOddAndEven()
+		public static Problem GetOddAndEven()
 		{
 			Random random = new Random();
 
@@ -605,7 +629,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		// Number ending in Even and 5 
-		public Problem Get5AndEven()
+		public static Problem GetFiveByEven()
 		{
 			Random random = new Random();
 			string fiveString = "5";
@@ -626,8 +650,7 @@ namespace MultiplierLibrary.Model
 		}
 
 		// SingleSumtoTen
-
-		public Problem GetSingleSumtoTen()
+		public static Problem GetSinglesSumToTen()
 		{
 			Random random = new Random();
 
@@ -653,58 +676,44 @@ namespace MultiplierLibrary.Model
 			return problem;
 		}
 
-
-		// Random
-
-		public Problem GetRandomProblem()
+		public static Problem GetRandomProblem()
 		{
-			Random random = new Random();
-			switch(random.Next(1, 31))
+			Random rand = new Random();
+			var auto  = Problems.ElementAt(rand.Next(0, Problems.Count)).Value;
+			return auto.Invoke();
+		}
+
+#endregion
+
+		private static Func<Problem> GetMethodByName(string name)
+		{
+			try
 			{
-				case 1: return Get1By1();
-				case 2: return Get2By1();
-				case 3: return Get3By1();
-				case 5: return GetTeens();
-				case 6: return GetFourtyToSixty();
-				case 7: return GetEightyTo100();
-				case 8: return GetEighties();
-				case 9: return GetNineties();
-				case 10: return Get1By1Square();
-				case 11: return GetTeenSquare();
-				case 12: return GetFortytoSixtySquare();
-				case 13: return GetEightytoHundredSquare();
-				case 14: return GetBeyondSquare();
-				case 15: return GetOdd();
-				case 16: return GetEven();
-				case 17: return GetOddAndEven();
-				case 18: return Get5AndEven();
-				case 19: return GetForties();
-				case 20: return GetThirties();
-				case 21: return GetTwenties();
-				case 22: return GetFifties();
-				case 23: return GetSixties();
-				case 24: return GetSeventies();
-				case 25: return GetTwentySquare();
-				case 26: return GetThirtySquare();
-				case 27: return GetFortySquare();
-				case 28: return GetFiftySquare();
-				case 29: return GetSixtySquare();
-				case 30: return GetSeventySquare();
-				default: return Get1By1();
+				var flags = (BindingFlags.Public | BindingFlags.Static);
+				Type type = typeof(Multiplier);
+				MethodInfo info = type.GetMethod(name, flags);
+				Func<Problem> problemFunc = (Func<Problem>) Delegate.CreateDelegate(typeof(Func<Problem>), info);
+				return problemFunc;
+
+			}
+			catch (Exception e)
+			{
+				Debug.Fail($"[ERROR] Could not find method '{name}'");
+				return null;
 			}
 		}
 
-		protected void OnProblemAdded()
+		public static void OnProblemAdded()
 		{
 
 		}
 
-		protected void OnGameFinished()
+		public static void OnGameFinished()
 		{
 
 		}
 
-		protected void OnGameStarted()
+		public static void OnGameStarted()
 		{
 			
 		}

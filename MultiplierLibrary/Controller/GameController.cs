@@ -24,7 +24,6 @@ namespace MultiplierLibrary.Controller
 		List<Problem> RoundProblems;
 		Dictionary<Types, List<Problem>> History;
 		List<Problem> Session;
-		Multiplier Multiplier;
 		RecordsDatabase Database;
 		#endregion
 
@@ -78,7 +77,6 @@ namespace MultiplierLibrary.Controller
 		{
 			Database = new RecordsDatabase();
 
-			Multiplier = new Multiplier();
 			RoundProblems = new List<Problem>();
 			player = new AudioPlayer();
 		}
