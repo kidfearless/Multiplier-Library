@@ -84,6 +84,8 @@ namespace MultiplierLibrary.View
 
 			LabelSkip.IsVisible = true;
 			TextBoxAnswer.IsVisible = true;
+			qButton.IsVisible = true;
+			numStack.IsVisible = true;
 			#endregion
 		}
 
@@ -143,7 +145,17 @@ namespace MultiplierLibrary.View
 
 		public void testButtonClicked(object sender, EventArgs args)
 		{
-			Settings.ShouldPlaySound = false;
+			if(Settings.ShouldPlaySound == true)
+			{
+				Settings.ShouldPlaySound = false;
+				testButton.BackgroundColor = Color.Gray;
+			}
+			else
+			{
+				Settings.ShouldPlaySound = true;
+				testButton.BackgroundColor = Color.White;
+			}
+			
 		}
 	}
 }
