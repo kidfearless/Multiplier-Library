@@ -12,27 +12,9 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProblemsPage : ContentPage
 	{
-		ISimpleAudioPlayer congratsPlayer;
-		ISimpleAudioPlayer correctPlayer;
-		ISimpleAudioPlayer wrongPlayer;
-
+		
 		public ProblemsPage()
 		{
-			//loads audio players on page load
-			correctPlayer = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
-			congratsPlayer = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
-			wrongPlayer = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
-			
-			//sets audio streams on page load
-			var streamCorrect = GetStreamFromFile("Correct.mp3");
-			var streamWrong = GetStreamFromFile("Wrong.mp3");
-			var streamCongrats = GetStreamFromFile("Congrats.mp3");
-
-			//Loads audio stream to audio player
-			correctPlayer.Load(streamCorrect);
-			wrongPlayer.Load(streamWrong);
-			congratsPlayer.Load(streamCongrats);
-
 			InitializeComponent();
 			
 			// Add skip event
@@ -45,37 +27,21 @@ namespace MultiplierLibrary.View
 		}
 
 		
-		Stream GetStreamFromFile(string filename)
-		{
-			var assembly = typeof(App).GetTypeInfo().Assembly;
-			var stream = assembly.GetManifestResourceStream("MultiplierLibrary.Audio." + filename);
-			return stream;
-		}
+		
 		//test method for 'correct' audio
 		public void OnCorrect()
 		{
-			if (Settings.ShouldPlaySound)
-			{
-				correctPlayer.Play();
-			}
 			
 		}
-
 
 		//test method for 'wrong' audio
 		public void OnWrong()
 		{
-			if (Settings.ShouldPlaySound)
-			{
-				wrongPlayer.Play();
-			}
 			
 		}
 		private void Congratulations()
 		{
-			congratsPlayer.Play();
-
-
+			
 
 			//button1.IsVisible = false;
 
@@ -124,11 +90,7 @@ namespace MultiplierLibrary.View
 		public void OnRoundEnd()
 		{
 			#region Show Congrats
-			if (Settings.ShouldPlaySound)
-			{
-				congratsPlayer.Play();
-			}
-			
+						
 			qButton.IsVisible = false;
 			CongratStack.IsVisible = true;
 			//ScoreboardLayout.IsVisible = false;

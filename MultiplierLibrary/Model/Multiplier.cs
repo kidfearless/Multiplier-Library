@@ -131,6 +131,7 @@ namespace MultiplierLibrary.Model
 
 			return problem;
 		}
+
 		//FourtyToSixty
 		public Problem DoFourtyToSixty()
 		{
@@ -153,7 +154,7 @@ namespace MultiplierLibrary.Model
 			Problem problem = new Problem
 			{
 				LeftHand = random.Next(10, 20),
-				RightHand = random.Next(10, 100),
+				RightHand = random.Next(10, 20),
 				Type = Types.Teens
 			};
 
