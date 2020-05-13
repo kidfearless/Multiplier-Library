@@ -6,7 +6,7 @@
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.HomePage">
 	<ContentPage.Content>
-		<StackLayout x:Name="layout" HorizontalOptions="FillAndExpand" >
+        <StackLayout x:Name="layout" HorizontalOptions="FillAndExpand" Padding="0,30,0,20">
 
 			<Label Text="Welcome To Multiplier!"
 				VerticalOptions="Start" 

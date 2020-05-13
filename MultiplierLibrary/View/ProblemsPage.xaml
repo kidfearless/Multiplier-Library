@@ -9,7 +9,7 @@
 	<ContentPage.Content>
 		<StackLayout Padding="10, 20, 10, 0">
 			<!--scoreboard-->
-			<StackLayout x:Name="ScoreboardLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+			<StackLayout x:Name="ScoreboardLayout" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0,30,0,20">
 				<StackLayout Orientation="Horizontal" HorizontalOptions="Start">
 					<Label FontSize="24"  TextColor="Green" Text="Correct"></Label>
 					<Label FontSize="24" TextColor="Green" Text="0" x:FieldModifier="public" x:Name="LabelCorrect"></Label>

@@ -5,7 +5,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.RoundResults">
-	<ContentPage.Content>
+    <ContentPage.Content Padding="0,30,0,20">
 		<StackLayout >
 			<Label Text="Round Results!"
 					VerticalOptions="Start" 
