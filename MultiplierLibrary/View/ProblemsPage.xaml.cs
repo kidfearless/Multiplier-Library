@@ -25,40 +25,16 @@ namespace MultiplierLibrary.View
 			TextBoxAnswer.Completed += OnTextBoxEnter;
 		}
 
-		
-		
 		//test method for 'correct' audio
 		public void OnCorrect()
 		{
-			
+			HideSolution();
 		}
 
 		//test method for 'wrong' audio
 		public void OnWrong()
 		{
-			
-		}
-		private void Congratulations()
-		{
-			
-
-			//button1.IsVisible = false;
-
-			Label1.FontSize = 40;
-			Label1.TextColor = Color.Black;
-			Label2.FontSize = 40;
-			Label2.TextColor = Color.Black;
-			SettingsButton.IsVisible = true;
-			AgainButton.IsVisible = true;
-			HomeButton.IsVisible = true;
-			ResultsButton.IsVisible = true;
-
-			LabelSkip.IsVisible = false;
-			TextBoxAnswer.IsVisible = false;
-			LabelLeft.IsVisible = false;
-			LabelRight.IsVisible = false;
-			LabelX.IsVisible = false;
-			LabelTitle.IsVisible = false;
+			ShowSolution();
 		}
 
 		protected void OnSkipTapped(object sender, EventArgs args)
@@ -71,6 +47,7 @@ namespace MultiplierLibrary.View
 			Entry textBox = sender as Entry;
 			if(!String.IsNullOrEmpty(textBox.Text) && !String.IsNullOrWhiteSpace(textBox.Text))
 			{
+				textBox.Focus();
 				App.Current.Game.OnTextBoxEnter(textBox);
 			}
 		}
@@ -86,6 +63,7 @@ namespace MultiplierLibrary.View
 			qButton.IsVisible = true;
 			numStack.IsVisible = true;
 			#endregion
+			HideSolution();
 		}
 
 		public void OnRoundEnd()
@@ -100,9 +78,8 @@ namespace MultiplierLibrary.View
 			LabelSkip.IsVisible = false;
 			TextBoxAnswer.IsVisible = false;
 			#endregion
+			HideSolution();
 		}
-
-	
 
 		private void AgainButton_Clicked(object sender, EventArgs e)
 		{
@@ -130,16 +107,18 @@ namespace MultiplierLibrary.View
 		}
 
 		//show Solurion 
-		public void ShowSolution(object sender, EventArgs args)
+		public void ShowSolution()
 		{
-			LabelL.Text = LabelLeft.Text;
-			LabelR.Text = LabelRight.Text;
-			LabelAnswer.Text = LabelAnswer.Text;
-			LabelL.IsVisible = true;
-			LabelX.IsVisible = true;
-			LabelR.IsVisible = true;
-			Labelequal.IsVisible = true;
+			var current =  App.Current.Game.CurrentProblem;
+			LabelAnswer.Text = $"Correct Answer: {current.LeftHand} X {current.RightHand} = {current.GetAnswer()}";
 			LabelAnswer.IsVisible = true;
+		}
+
+		//Hide Solurion 
+		public void HideSolution()
+		{
+			LabelAnswer.Text = String.Empty;
+			LabelAnswer.IsVisible = false;
 		}
 	}
 }

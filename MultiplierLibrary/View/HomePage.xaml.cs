@@ -20,12 +20,7 @@ namespace MultiplierLibrary.View
 		public HomePage()
 		{
 			InitializeComponent();
-
-			/**
-			 *	<model:LinkedStepper x:FieldModifier="public" x:Name="ProblemsStepper" Grid.Row="4" Grid.Column="0" HorizontalOptions="Center">
-			 *	<Label Grid.Row="4" x:FieldModifier="public" x:Name="SpecialLabel" Grid.Column="1" Text="test">
-			 */
-			//AddGrid();
+			AddGrid();
 		}
 
 		private void StartButton_Clicked(object sender, EventArgs e)
@@ -120,12 +115,6 @@ namespace MultiplierLibrary.View
 
 		private void layout_ChildAdded(object sender, ElementEventArgs e)
 		{
-			StackLayout stack = sender as StackLayout;
-			if(stack.Children.Count == 2)
-			{
-				Thread thread = new Thread(AddGrid);
-				thread.Start();
-			}
 			Debug.WriteLine(sender);
 		}
 	}
