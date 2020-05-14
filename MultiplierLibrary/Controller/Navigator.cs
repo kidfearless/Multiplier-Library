@@ -1,4 +1,5 @@
-﻿using MultiplierLibrary.View;
+﻿using MultiplierLibrary.Model;
+using MultiplierLibrary.View;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,10 +12,14 @@ namespace MultiplierLibrary.Controller
 	{
 		public static ProblemsPage ProblemsPage = new ProblemsPage();
 		public static HomePage HomePage = new HomePage();
-		public static RoundResults RoundResultsPage = new RoundResults();
+		public static RoundResults RoundResultsPage;
 		public static SettingsPage SettingsPage = new SettingsPage();
 		public static void StartGame(string userName)
 		{
+			if (Multiplier.ProblemCount == 0)
+			{
+				return;
+			}
 			App.Current.MainPage = ProblemsPage;
 			App.Current.Game.Page = ProblemsPage;
 			App.Current.Game.StartNewGame(userName);
@@ -22,6 +27,10 @@ namespace MultiplierLibrary.Controller
 
 		public static void StartGame()
 		{
+			if(Multiplier.ProblemCount == 0)
+			{
+				return;
+			}
 			App.Current.MainPage = ProblemsPage;
 			App.Current.Game.Page = ProblemsPage;
 			App.Current.Game.StartNewGame();
@@ -39,8 +48,9 @@ namespace MultiplierLibrary.Controller
 
 		public static void CheckResults()
 		{
-			App.Current.Game.OnResultsPage();
+			RoundResultsPage = new RoundResults();
 			App.Current.MainPage = RoundResultsPage;
+			App.Current.Game.OnResultsPage(RoundResultsPage);
 		}
 
 		public static void GoToSettings()

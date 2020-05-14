@@ -60,50 +60,49 @@ namespace MultiplierLibrary.Model
 		Size
 	}
 
+
 	// Update this if you change the Types enum
 	public static class TypeConverter
 	{
 		public static string ToString(Types type)
 		{
-			switch ((int)type)
+			switch (type)
 			{
-				case 0: return "One By One";
-				case 1: return "Two By One";
-				case 2: return "Three By One";
-				case 3: return "Teens";
-				case 4: return "Fourty To Sixty";
-				case 5: return "Eighty To One-Hundred";
-				case 6: return "Eighties";
-				case 7: return "Nineties";
-				case 8: return "Singles Squared";
-				case 9: return "Teens Squared";
-				case 10: return "Fourties To Sixties Squared";
-				case 11: return "Eighty To One-Hundred Squared";
-				case 12: return "Squares One-Hundred And Beyond";
-				case 13: return "Odd Numbers";
-				case 14: return "Even Numbers";
-				case 15: return "One Odd and Even Number";
-				case 16: return "Number Ending in 5 and Number ending in Even";
-				//case 8: return "Factored";
-				//case 9: return "Friendly";
-				//case 17: return "Circles";
-				//case 18: return "Primes";
-				case 17: return "Forties";
-				case 18: return "Thirties";
-				case 19: return "Twenties";
-				case 20: return "Fifties";
-				case 21: return "Sixties";
-				case 22: return "Seventies";
-				case 23: return "Twenties Squared";
-				case 24: return "Thirties Squared";
-				case 25: return "Forties Squared";
-				case 26: return "Fifties Sqaured";
-				case 27: return "Sixties Squared";
-				case 28: return "Seventies Squared";
-				case 29: return "Size";
+				case Types.OneByOne: return "One By One";
+				case Types.TwoByOne: return "Two By One";
+				case Types.ThreeByOne: return "Three By One";
+				case Types.EightyTo100: return "Eighty To One-Hundred";
+				case Types.SinglesSquared: return "Singles Squared";
+				case Types.TeensSquared:  return "Teens Squared";
+				case Types.FourtyToSixtySquared: return "Fourty To Sixty Squared";
+				case Types.EightyTo100Squared: return "80 To 100 Squared";
+				case Types.AllTheRestSquared: return "All The Rest Squared";
+				case Types.TwentySquared: return "Twenty Squared";
+				case Types.ThirtySquared: return "Thirty Squared";
+				case Types.FortySquared: return "Fourty Squared";
+				case Types.FiftySquared: return "Fifty Squared";
+				case Types.SixtySquared: return "Sixty Squared";
+				case Types.SeventySquared: return "Seventy Squared";
+				case Types.EightySquared: return "Eighty Squared";
+				case Types.NinetySquared: return "Ninety Squared";
+				case Types.Factored: return "Factored";
+				case Types.Teens: return "Teens";
+				case Types.FourtiesToSixties: return "Fourties To Sixties";
+				case Types.Eighties: return "Eighties";
+				case Types.Nineties: return "Nineties";
+				case Types.Twenties: return "Twenties";
+				case Types.Thirties: return "Thirties";
+				case Types.Forties: return "Forties";
+				case Types.Fifties: return "Fifties";
+				case Types.Sixties: return "Sixties";
+				case Types.Seventies: return "Seventies";
+				case Types.Even: return "Evens";
+				case Types.Odd: return "Odds";
+				case Types.OddAndEven: return "Odd By Even";
+				case Types.FiveByEven: return "Number Ending in 5 By Even";
+				case Types.SinglesSumToTen: return "Singles Summed To Ten";
+				case Types.TeensEx: return "Teens Extreme";
 				default: return "One By One";
-
-				
 			}
 		}
 

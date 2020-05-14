@@ -18,6 +18,7 @@ namespace MultiplierLibrary.Model
 	{
 		private static readonly Dictionary<int, int[]> Factors = InitFactors();
 		private static Dictionary<Types, Func<Problem>> Problems = InitProblems();
+		public static int ProblemCount => Problems.Count;
 
 		private static Dictionary<Types, Func<Problem>> InitProblems()
 		{

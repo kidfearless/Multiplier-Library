@@ -10,7 +10,7 @@ using System.Text;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Threading.Tasks;
-
+using TypeConverter = MultiplierLibrary.Model.TypeConverter;
 
 namespace MultiplierLibrary.Controller
 {
@@ -93,8 +93,8 @@ namespace MultiplierLibrary.Controller
 			Debug.WriteLine($"[DEBUG] got userid {this.userID}");
 
 			Session = new List<Problem>();
-			History = await Database.GetProblemHistory(this.userID);
 			OnRoundStart();
+			History = await Database.GetProblemHistory(this.userID);
 		}
 
 		public void StartNewGame(string username)
@@ -192,7 +192,7 @@ namespace MultiplierLibrary.Controller
 			Page.OnCorrect();
 		}
 
-		public void OnResultsPage()
+		public void OnResultsPage(RoundResults page)
 		{
 			Dictionary<Types, Stats> stats = new Dictionary<Types, Stats>();
 
@@ -209,44 +209,48 @@ namespace MultiplierLibrary.Controller
 				stats[problem.Type].Total++;
 				var label = new Label
 				{
-					Text = $"Problem {i}: {problem.LeftHand} X {problem.LeftHand}",
+					Text = $"Problem {i}: {problem.LeftHand} X {problem.RightHand}",
 					TextColor = problem.Correct == 1 ? Color.Green : Color.Red,
 					HorizontalTextAlignment = TextAlignment.Center
 				};
-				var stackLayout = Navigator.RoundResultsPage.ProblemStack;
-				stackLayout.Children.Add(label);
+
+				page.ProblemStack.Children.Add(label);
 			}
-			var results = Navigator.RoundResultsPage;
-			results.LabelCorrect.Text = Correct.ToString();
-			results.LabelWrong.Text = Wrong.ToString();
-			results.LabelTotal.Text = TotalProblems.ToString();
+
+			page.LabelCorrect.Text = Correct.ToString();
+			page.LabelWrong.Text = Wrong.ToString();
+			page.LabelTotal.Text = TotalProblems.ToString();
 	
 			
 			foreach (var stat in stats)
 			{
-				var type = Model.TypeConverter.ToString(stat.Key);
+				var type = TypeConverter.ToString(stat.Key);
 				type = type.PadRight(30 - type.Length);
 
-				Button button = new Button
+				var label = new Label
 				{
 					Text =  $"Type: {type}\t\t\tWins: {stat.Value.Wins} " +
 							$"Loss: {stat.Value.Losses} AVG: {stat.Value.AVG}",
-				};
-				button.Clicked += delegate (object sender, EventArgs e)
-				{
-					TypeButton_Clicked(sender, e, stat.Key);
-				};
+					//BackgroundColor = Color.LightGray,
+					Padding = new Thickness(5),
+					HorizontalOptions = LayoutOptions.CenterAndExpand,
 
-				Navigator.RoundResultsPage.ProblemStack.Children.Insert(0, button);
+				};
+				//button.Clicked += delegate (object sender, EventArgs e)
+				//{
+				//	TypeButton_Clicked(sender, e, stat.Key);
+				//};
+
+				page.ProblemStack.Children.Insert(0, label);
 			}
 
 
 		}
 
-		private void TypeButton_Clicked(object sender, EventArgs e, Types type)
-		{
+		//private void TypeButton_Clicked(object sender, EventArgs e, Types type)
+		//{
 			
-		}
+		//}
 
 		public async void OnAnsweredPost(Problem oldProblem)
 		{
