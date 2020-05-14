@@ -47,7 +47,7 @@ namespace MultiplierLibrary.View
 					Text = "One By One",
 					HorizontalOptions = LayoutOptions.Center
 				};
-				var linkedSwitch = new LinkedSwitch("OneByOne");
+				var linkedSwitch = new LinkedSwitch(Types.OneByOne.ToString());
 				linkedSwitch.HorizontalOptions = LayoutOptions.Center;
 				grid.Children.Add(label, (int)Side.Left, index);
 				grid.Children.Add(linkedSwitch, (int)Side.Right, index++);
@@ -60,7 +60,7 @@ namespace MultiplierLibrary.View
 					Text = "Two By One",
 					HorizontalOptions = LayoutOptions.Center
 				};
-				var linkedSwitch1 = new LinkedSwitch("TwoByOne");
+				var linkedSwitch1 = new LinkedSwitch(Types.TwoByOne.ToString());
 				linkedSwitch1.HorizontalOptions = LayoutOptions.Center;
 				grid.Children.Add(label1, (int)Side.Left, index);
 				grid.Children.Add(linkedSwitch1, (int)Side.Right, index++);
@@ -73,7 +73,7 @@ namespace MultiplierLibrary.View
 					Text = "Three By One",
 					HorizontalOptions = LayoutOptions.Center
 				};
-				var linkedSwitch2 = new LinkedSwitch("ThreeByOne");
+				var linkedSwitch2 = new LinkedSwitch(Types.ThreeByOne.ToString());
 				linkedSwitch2.HorizontalOptions = LayoutOptions.Center;
 				grid.Children.Add(label2, (int)Side.Left, index);
 				grid.Children.Add(linkedSwitch2, (int)Side.Right, index++);
@@ -86,7 +86,7 @@ namespace MultiplierLibrary.View
 					Text = "Factors",
 					HorizontalOptions = LayoutOptions.Center
 				};
-				var linkedSwitch3 = new LinkedSwitch("Factors");
+				var linkedSwitch3 = new LinkedSwitch(Types.Factored.ToString());
 				linkedSwitch3.HorizontalOptions = LayoutOptions.Center;
 				grid.Children.Add(label3, (int)Side.Left, index);
 				grid.Children.Add(linkedSwitch3, (int)Side.Right, index++);

@@ -140,7 +140,7 @@ namespace MultiplierLibrary.Model
 			// Get a random number from the lower half
 			int index = random.Next(0, array.Length/2);
 			problem.LeftHand = array[index];
-			problem.RightHand = array[array.Length - index];
+			problem.RightHand = array[array.Length - 1 - index];
 			//problem.LeftHandSquare = array[index];
 			problem.Type = Types.Factored;
 
