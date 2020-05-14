@@ -97,7 +97,7 @@ namespace MultiplierLibrary.Model
 				case 23: return "Twenties Squared";
 				case 24: return "Thirties Squared";
 				case 25: return "Forties Squared";
-				case 26: return "Fifties Sqaured";
+				case 26: return "Fifties Squared";
 				case 27: return "Sixties Squared";
 				case 28: return "Seventies Squared";
 				case 29: return "Size";
