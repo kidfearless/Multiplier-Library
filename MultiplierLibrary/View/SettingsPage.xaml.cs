@@ -1,4 +1,5 @@
 ﻿using MultiplierLibrary.Controller;
+using MultiplierLibrary.Data;
 using MultiplierLibrary.Model;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,6 @@ namespace MultiplierLibrary.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
 	{
-		public enum Side : int
-		{
-			Left = 0,
-			Right = 1
-		}
-
 		public SettingsPage()
 		{
 			InitializeComponent();

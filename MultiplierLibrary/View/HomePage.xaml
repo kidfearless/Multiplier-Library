@@ -6,7 +6,7 @@
 			 mc:Ignorable="d"
 			 x:Class="MultiplierLibrary.View.HomePage">
 	<ContentPage.Content>
-        <StackLayout x:Name="layout" HorizontalOptions="FillAndExpand" Padding="0,30,0,20">
+		<StackLayout x:Name="layout" ChildAdded="layout_ChildAdded" HorizontalOptions="FillAndExpand" Padding="0,30,0,20">
 
 			<Label Text="Welcome To Multiplier!"
 				VerticalOptions="Start" 
@@ -22,42 +22,8 @@
 
 			</Entry>
 
-			<Grid>
-				<!-- class id is used as the Properties key so that we don't have to make a new class with a semantic property -->
-				<!--OneByOne-->
-				<model:LinkedSwitch LinkedProperty="OneByOne" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center">
-					<x:Arguments>
-						<x:String>OneByOne</x:String>
-					</x:Arguments>
-				</model:LinkedSwitch>
-				<Label Grid.Row="0" Grid.Column="1" Text="One By One">
-				</Label>
-				<!--TwoByOne-->
-				<model:LinkedSwitch LinkedProperty="TwoByOne" Grid.Row="1" Grid.Column="0" HorizontalOptions="Center">
-					<x:Arguments>
-						<x:String>TwoByOne</x:String>
-					</x:Arguments>
-				</model:LinkedSwitch>
-				<Label Grid.Row="1" Grid.Column="1" Text="Two By One">
-				</Label>
-				<!--ThreeByOne-->
-				<model:LinkedSwitch LinkedProperty="TwoByOne" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
-					<x:Arguments>
-						<x:String>TwoByOne</x:String>
-					</x:Arguments>
-				</model:LinkedSwitch>
-				<Label Grid.Row="2" Grid.Column="1" Text="TwoByOne">
-				</Label>
-				<!--Factored-->
-				<model:LinkedSwitch Grid.Row="3" Grid.Column="0" HorizontalOptions="Center">
-					<x:Arguments>
-						<x:String>Factored</x:String>
-					</x:Arguments>
-				</model:LinkedSwitch>
-				<Label Grid.Row="3" Grid.Column="1" Text="Factors">
-				</Label>
+			<Grid x:Name="GridList">
 			</Grid>
-
 
 			<Button 
 				Text="Start Round!"

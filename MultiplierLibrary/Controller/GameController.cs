@@ -61,8 +61,6 @@ namespace MultiplierLibrary.Controller
 			}
 		}
 		int userID;
-		Types LastType;
-		int maxProblems = 10;
 		private string username;
 		public string UserName
 		{
@@ -257,7 +255,7 @@ namespace MultiplierLibrary.Controller
 			this.TotalProblems++;
 			Session.Add(oldProblem);
 
-			if(this.TotalProblems >= this.maxProblems)
+			if(this.TotalProblems >= Settings.MaxProblems)
 			{
 				OnRoundEnd();
 				return;

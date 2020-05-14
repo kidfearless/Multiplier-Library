@@ -3,6 +3,12 @@ using System.IO;
 
 namespace MultiplierLibrary.Data
 {
+    public enum Side : int
+    {
+        Left = 0,
+        Right = 1
+    }
+
     public static class Constants
     {
         public const string DatabaseFilename = "Problems.db3";

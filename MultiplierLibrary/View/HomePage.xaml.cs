@@ -1,9 +1,12 @@
 ﻿using MultiplierLibrary.Controller;
+using MultiplierLibrary.Data;
 using MultiplierLibrary.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -17,6 +20,12 @@ namespace MultiplierLibrary.View
 		public HomePage()
 		{
 			InitializeComponent();
+
+			/**
+			 *	<model:LinkedStepper x:FieldModifier="public" x:Name="ProblemsStepper" Grid.Row="4" Grid.Column="0" HorizontalOptions="Center">
+			 *	<Label Grid.Row="4" x:FieldModifier="public" x:Name="SpecialLabel" Grid.Column="1" Text="test">
+			 */
+			//AddGrid();
 		}
 
 		private void StartButton_Clicked(object sender, EventArgs e)
@@ -31,5 +40,94 @@ namespace MultiplierLibrary.View
 		{
 			Navigator.GoToSettings();
 		}
+
+		void AddGrid()
+		{
+			Grid grid = new Grid();
+			int index = 0;
+			#region OneByOne
+			{
+				var label = new Label
+				{
+					Text = "One By One",
+					HorizontalOptions = LayoutOptions.Center
+				};
+				var linkedSwitch = new LinkedSwitch("OneByOne");
+				linkedSwitch.HorizontalOptions = LayoutOptions.Center;
+				grid.Children.Add(label, (int)Side.Left, index);
+				grid.Children.Add(linkedSwitch, (int)Side.Right, index++);
+			}
+			#endregion
+			#region TwoByOne
+			{
+				var label1 = new Label
+				{
+					Text = "Two By One",
+					HorizontalOptions = LayoutOptions.Center
+				};
+				var linkedSwitch1 = new LinkedSwitch("TwoByOne");
+				linkedSwitch1.HorizontalOptions = LayoutOptions.Center;
+				grid.Children.Add(label1, (int)Side.Left, index);
+				grid.Children.Add(linkedSwitch1, (int)Side.Right, index++);
+			}
+			#endregion
+			#region ThreeByOne
+			{
+				var label2 = new Label
+				{
+					Text = "Three By One",
+					HorizontalOptions = LayoutOptions.Center
+				};
+				var linkedSwitch2 = new LinkedSwitch("ThreeByOne");
+				linkedSwitch2.HorizontalOptions = LayoutOptions.Center;
+				grid.Children.Add(label2, (int)Side.Left, index);
+				grid.Children.Add(linkedSwitch2, (int)Side.Right, index++);
+			}
+			#endregion
+			#region Factors
+			{
+				var label3 = new Label
+				{
+					Text = "Factors",
+					HorizontalOptions = LayoutOptions.Center
+				};
+				var linkedSwitch3 = new LinkedSwitch("Factors");
+				linkedSwitch3.HorizontalOptions = LayoutOptions.Center;
+				grid.Children.Add(label3, (int)Side.Left, index);
+				grid.Children.Add(linkedSwitch3, (int)Side.Right, index++);
+			}
+			#endregion
+			#region MaxProblems
+			{
+				
+				var label4 = new Label
+				{
+					Text = $"Max Problems: {Settings.MaxProblems}",
+					HorizontalOptions = LayoutOptions.CenterAndExpand
+				};
+				var stepper = new LinkedStepper(nameof(Settings.MaxProblems), 5, 1, 100);
+				stepper.ValueChanged += delegate (object sender, ValueChangedEventArgs e)
+				{
+					label4.Text = $"Max Problems: {Settings.MaxProblems}";
+				};
+				stepper.HorizontalOptions = LayoutOptions.CenterAndExpand;
+				grid.Children.Add(label4, (int)Side.Left, index);
+				grid.Children.Add(stepper, (int)Side.Right, index++);
+			}
+			#endregion
+			layout.Children.Insert(2, grid);
+		}
+
+		private void layout_ChildAdded(object sender, ElementEventArgs e)
+		{
+			StackLayout stack = sender as StackLayout;
+			if(stack.Children.Count == 2)
+			{
+				Thread thread = new Thread(AddGrid);
+				thread.Start();
+			}
+			Debug.WriteLine(sender);
+		}
 	}
 }
+ 

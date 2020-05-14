@@ -91,6 +91,13 @@ namespace MultiplierLibrary.Model
 			set => SetProperty(nameof(RepeatProblemMinimum), value);
 		}
 
+		// Maximum number of problems in a round
+		public static int MaxProblems
+		{
+			get => GetProperty(nameof(MaxProblems), 10);
+			set => SetProperty(nameof(MaxProblems), value);
+		}
+
 		// setting for the whether or not the app will play sounds if a player gets problems right/wrong
 		public static bool ShouldPlaySound
 		{
